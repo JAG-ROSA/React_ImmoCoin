@@ -1,0 +1,97 @@
+@import 'variables', 'typographies', 'colors';
+
+
+body {
+  position: relative;
+  margin: auto;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  font-family: 'Open_Sans-Regular';
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Rajdhani-SemiBold';
+  letter-spacing: 1.8px;
+}
+
+
+// NAVBAR //
+nav {
+  padding: 10px 20px 5px 20px;
+  margin-bottom: 30px;
+  border-bottom: 5px solid $primary-color;
+  h1 a {
+    font-family: 'Rajdhani-Bold';
+    color: $primary-color;
+    text-decoration: none;
+    font-size: 1.4em;
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+
+  & ul {
+    list-style-type: none;
+    & li a {
+      text-decoration: none;
+      font-family: 'Open_Sans-SemiBold';
+      position: relative;
+      color: $primary-color;
+      &:hover {
+        color: $primary-color;
+      }
+      &:after {
+        content: '';
+        height: 2.3px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        background-color: $primary-color;
+        transition: 0.2s;
+      }
+      &:hover:after {
+        width: 100%;
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+
+
+.link, .link:visited {
+	text-decoration: none;
+	position: relative;
+	color: #069;
+	
+	&:after {
+		content: '';
+		height: 3px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		background: #069;
+		transition: 0.2s;
+	}
+
+	&:hover:after {
+		width: 100%;
+	}
+	
+}
+
+// FOOTER //
+
+footer {
+  padding: 40px 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  & a.title-footer {
+    color: $light-color;
+    text-decoration: none;
+    font-size: 1.2em;
+  }
+}

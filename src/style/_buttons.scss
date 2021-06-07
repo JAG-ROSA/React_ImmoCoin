@@ -1,0 +1,48 @@
+@import 'variables';
+
+
+.btn {
+  color: white;
+  background-color: $quaternary-color;
+  border: none;
+  border-radius: 0.2em;
+  &:hover {
+    background-color: $secondary-color;
+  }
+}
+
+
+.btn-secondary {
+  text-decoration: none;
+  color: white;
+  background-color: $tertiary-color;
+  border: none;
+  border-radius: 0.2em;
+  &:hover {
+    background-color: $quaternary-color;
+  }
+}
+
+
+
+.link, .link:visited {
+	text-decoration: none;
+	position: relative;
+	color: $quaternary-color;
+	
+	&:after {
+		content: '';
+		height: 2.3px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		background: $quaternary-color;
+		transition: 0.2s;
+	}
+
+	&:hover:after {
+		width: 100%;
+	}
+	
+}

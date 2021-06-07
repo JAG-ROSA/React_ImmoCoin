@@ -1,7 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'style/style.scss'
 import Navbar from "components/Navbar";
+import Footer from "components/Footer";
 import Home from "pages/Home";
 import Register from "pages/Register";
 import Profile from "pages/Profile";
@@ -26,6 +28,7 @@ const App = () => (
         </Route>
       </Switch>
     </main>
+    <Footer />
   </Router>
 );
 

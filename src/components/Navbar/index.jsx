@@ -12,6 +12,7 @@ const Navbar = () => (
               <li><Link to="/register">S'inscrire</Link></li>
               <li><Link to="/user">Profil</Link></li>
               <li><Link to="/login">Se connecter</Link></li>
+              <li><Link to="/logout">Se déconnecter</Link></li>
             </ul>
           </div>
         </div>

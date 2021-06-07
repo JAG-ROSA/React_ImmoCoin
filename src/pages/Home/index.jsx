@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { 
-  Jumbotron, Button, Container, ButtonGroup, Row, Col, Card
+  Jumbotron, Button, Container, Row, Col, Card
 } from "react-bootstrap";
 import BannerImage from "assets/images/01_happy_woman.jpg"
 import { BASE_URL } from "config";
+import { Link } from "react-router-dom";
+
 
 const Home = () => {
   const [propertiesList, setPropertiesList] = useState([]);
@@ -27,49 +29,40 @@ const Home = () => {
   },[]);
 
   return (
-    <div>
-      <Jumbotron fluid  style={{ backgroundImage: `url(${BannerImage})`, height: '100%', width: '100%', backgroundSize: 'cover'  }}>
+    <div className="pb-5">
+      <Jumbotron fluid style={{ backgroundImage: `url(${BannerImage})`, height: '80vh', width: '100%', backgroundSize: 'cover', backgroundPosition: 'center top' }} className="d-flex justify-content-center">
         <Container style={{textAlign: "center"}}>
-          <h1>Bienvenue sur Immo Coin</h1>
-          <p>
-            Facilitez-vous la vie et faites confiance à Immo Coin
-          </p>
-          <ButtonGroup>
-            <Button variant="primary"> Je suis un propriétaire </Button>
-            <Button variant="primary"> Je suis un particulier </Button>
-          </ButtonGroup>
+          <h2 className="fs-1 pt-70">Bienvenue sur ImmoCoin</h2>
+          <p className="mb-5 pb-2">Facilitez-vous la vie et faites confiance à ImmoCoin</p>
+          <Link to='/login' className="btn-secondary btn-lg">S'inscrire</Link>
         </Container>
       </Jumbotron>
-      <Container style={{textAlign: "center"}}>
-        <Row style={{ heigth: '50rem' }}>
+      <Container style={{textAlign: "center"}} className="pb-5">
+        <Row style={{ heigth: '50rem' }} className="p-5">
           <Col>
-            <Card>
+            <Card className="my-bg-light">
               <Card.Body>
-                <Card.Title> Propriétaires </Card.Title>
+                <Card.Title>Propriétaires</Card.Title>
                 <Card.Text>
                   Vous avez un logement à vendre ?
                 </Card.Text>
-                <Button variant="primary"> Je suis un propriétaire </Button>
+                <Button variant="primary">Je suis un propriétaire</Button>
               </Card.Body>
             </Card>
           </Col>
           <Col>
-            <Card>
+            <Card className="my-bg-light">
               <Card.Body>
-                <Card.Title> Particulier </Card.Title>
+                <Card.Title>Particuliers</Card.Title>
                 <Card.Text>
                   Vous avez un logement à louer/acheter ?
                 </Card.Text>
-                <Button variant="primary"> Je suis un particulier </Button>
+                <Button variant="primary">Je suis un particulier</Button>
               </Card.Body>
             </Card>
           </Col>
         </Row>
-      </Container>
-      <Container style={{textAlign: "center"}}>
-        <Row>
-          Consultez la liste de nos annonces 
-        </Row>
+        <p>Consultez la liste de nos annonces</p>
         <Row>
           {propertiesList.map((property) => (
             <Card>
@@ -83,7 +76,7 @@ const Home = () => {
                 </Card.Text>
               </Card.Body>
             </Card>))
-          };
+          }
         </Row>
       </Container>
     </div>

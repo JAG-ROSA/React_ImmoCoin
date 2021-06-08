@@ -65,7 +65,7 @@ const Home = () => {
         <p>Consultez la liste de nos annonces</p>
         <Row>
           {propertiesList.map((property) => (
-            <Card>
+            <Card key={property.id}>
               <Card.Body>
                 <Card.Title> {property.title} </Card.Title>
                 <Card.Text>

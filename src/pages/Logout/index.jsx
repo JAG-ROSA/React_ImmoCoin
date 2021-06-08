@@ -17,7 +17,8 @@ const Logout = () => {
     });
   };
 
-  const logoutFetch = () => {
+  
+  useEffect(() => {
     UserManager.logoutUser()
       .then(() => {
         dispatch(logoutSuccess());
@@ -29,11 +30,7 @@ const Logout = () => {
         openNotification("error", "Déconnexion échouée...");
         console.log(error.message);
       });
-  };
-
-  useEffect(() => {
-    logoutFetch();
-  }, []);
+  });
 
   return (
     <Container>

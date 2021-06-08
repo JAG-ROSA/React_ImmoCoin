@@ -5,6 +5,7 @@ import {
 import BannerImage from "assets/images/01_happy_woman.jpg"
 import { BASE_URL } from "config";
 import { Link } from "react-router-dom";
+import SearchBar from 'components/SearchBar'
 
 
 const Home = () => {
@@ -62,6 +63,7 @@ const Home = () => {
             </Card>
           </Col>
         </Row>
+        <SearchBar data={propertiesList}/>
         <p>Consultez la liste de nos annonces</p>
         <Row>
           {propertiesList.map((property) => (

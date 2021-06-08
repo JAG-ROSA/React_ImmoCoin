@@ -9,6 +9,5 @@ const dev = {
   BASE_URL: "http://localhost:3001"
  }
 };
-console.log(process.env.NODE_ENV)
 
 export const config = process.env.NODE_ENV === "development" ? dev : prod;

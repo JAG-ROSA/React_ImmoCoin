@@ -1,0 +1,79 @@
+@import 'variables';
+
+
+.my-bg-primary {
+	background-color: $primary-color;
+}
+
+.my-text-primary {
+  color: $primary-color;	
+}
+
+
+.my-bg-secondary {
+	background-color: $secondary-color;
+}
+
+.my-text-secondary {
+  color: $secondary-color;	
+}
+
+
+.my-bg-tertiary {
+	background-color: $tertiary-color;
+}
+
+.my-text-tertiary {
+  color: $tertiary-color;	
+}
+
+
+.my-bg-quaternary {
+	background-color: $quaternary-color;
+}
+
+.my-text-quaternary {
+  color: $quaternary-color;	
+}
+
+
+.my-bg-light {
+	background-color: $light-color;
+}
+
+.my-text-light {
+  color: $light-color;	
+}
+
+
+.my-bg-black {
+	background-color: $black-color;
+}
+
+.my-text-black {
+  color: $black-color;	
+}
+
+
+
+// ALERTS //
+
+.my-warning {
+  background-color: $quaternary-color;
+  opacity: 0.5;
+}
+
+.my-danger {
+  background-color: $tertiary-color;
+  opacity: 0.5;
+}
+
+.my-success {
+  background-color: #9FD996;
+  opacity: 0.7;
+}
+
+.my-info {
+  background-color: $secondary-color;
+  opacity: 0.7;
+}

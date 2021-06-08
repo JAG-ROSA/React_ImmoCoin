@@ -1,4 +1,4 @@
-import { AUTH_TOKEN } from "config";
+import { AUTH_TOKEN, USER_ID } from "config";
 import Cookies from "js-cookie";
 import {
   USER_REGISTRATION_FAILED,
@@ -11,6 +11,7 @@ import {
 
 const INITIAL_STATE = {
   isLogged: !!Cookies.get(AUTH_TOKEN),
+  userId: Cookies.get(USER_ID),
   error: "",
 };
 
@@ -27,10 +28,16 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isLogged: true,
       };
-
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLogged: true,
+        userId: action.userId,
+      };
     case LOGOUT_SUCCESS:
       return {
         isLogged: false,
+        userId: "",
       };
     case LOGOUT_FAILED:
       return {

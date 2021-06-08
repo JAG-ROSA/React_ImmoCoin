@@ -2,9 +2,23 @@ import React from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import UserManager from "services/user";
 import { useHistory } from "react-router-dom";
+import { notification } from "antd";
+import { useDispatch } from "react-redux";
+import {
+  registrationSuccess,
+  registrationFailed,
+} from "store/user/userAction";
+import "antd/dist/antd.css";
 
 const Register = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
+
+  const openNotification = (type, message) => {
+    notification[type]({
+      message: message,
+    });
+  };
 
   const registerFetch = (event) => {
     event.preventDefault();
@@ -13,11 +27,14 @@ const Register = () => {
       password: event.target.formBasicPassword.value,
     };
     UserManager.registerUser(data.email, data.password)
-      .then((token) => {
-        /* dispatch(usersRegistrationSuccess(token)); */
+      .then(() => {
+        dispatch(registrationSuccess());
+        openNotification("success", "Enregistrement réussi !");
         history.push("/");
       })
       .catch((error) => {
+        dispatch(registrationFailed(error.message))
+        openNotification("error", "Enregistrement échoué !");
         console.log(error.message);
       });
   };

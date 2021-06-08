@@ -16,8 +16,9 @@ export const registrationFailed = (error) => ({
   error,
 });
 
-export const loginSuccess = () => ({
+export const loginSuccess = (id) => ({
   type: LOGIN_SUCCESS,
+  userId: id,
 });
 
 export const loginFailed = (error) => ({

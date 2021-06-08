@@ -2,9 +2,20 @@ import React from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import UserManager from "services/user";
 import { useHistory } from "react-router-dom";
+import { notification } from "antd";
+import { useDispatch } from "react-redux";
+import { loginSuccess, loginFailed } from "store/user/userAction";
+import "antd/dist/antd.css";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
+
+  const openNotification = (type, message) => {
+    notification[type]({
+      message: message,
+    });
+  };
 
   const loginFetch = (event) => {
     event.preventDefault();
@@ -13,11 +24,14 @@ const Login = () => {
       password: event.target.formBasicPassword.value,
     };
     UserManager.loginUser(data.email, data.password)
-      .then((token) => {
-        /* dispatch(usersLoginSuccess(token)); */
+      .then(() => {
+        dispatch(loginSuccess());
+        openNotification("success", "Connexion réussie !");
         history.push("/");
       })
       .catch((error) => {
+        dispatch(loginFailed(error.message));
+        openNotification("error", "Hum... il y a une petite erreur...");
         console.log(error.message);
       });
   };

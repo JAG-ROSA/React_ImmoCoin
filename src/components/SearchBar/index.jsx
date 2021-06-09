@@ -10,7 +10,7 @@ const SearchBar = ({data, filtered}) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const searchData = (value) => {
-    filtered(value)
+    filtered(value);
   };
 
   useEffect(() =>{
@@ -38,7 +38,7 @@ const SearchBar = ({data, filtered}) => {
     setInputValueMax(value[1]);
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     const filter = (min, max, value) => {
       console.log(min)
       console.log(max)
@@ -47,10 +47,8 @@ const SearchBar = ({data, filtered}) => {
       return (data.price >= min && data.price <= max && (data.title.toLowerCase().search(value) !== -1 || data.description.toLowerCase().search(value) !== -1));
       });
       setFilteredData(result);
-      searchData(filteredData)
+      searchData(filteredData);
     }
-    
-    console.log(disabled)
     disabled ? filter(0, 1000000, searchTerm) : filter(inputValueMin, inputValueMax, searchTerm);    
   }, [inputValueMin, inputValueMax, data, disabled, searchTerm, filteredData]);
 

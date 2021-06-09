@@ -28,11 +28,7 @@ const Home = () => {
 
   const searchBarResult = (searchBarData) => {
     setFilteredData(searchBarData);
-  console.log(filteredData)
-
   };
-
-  console.log(filteredData)
 
   return (
     <div className="pb-5">

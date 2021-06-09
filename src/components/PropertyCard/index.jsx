@@ -1,23 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Container, Row, Col, Card, CardDeck } from "react-bootstrap";
+import { Button, Container, Card, CardDeck } from "react-bootstrap";
 
 const PropertyCard = ({data}) => {
   return (
     <Container style={{ textAlign: "center" }} className="pb-5">
       <CardDeck>
-      {data.map((value)=>{
+      {data.map((property)=>{
       return(
-        <Card key={value.id}>
+        <Card key={property.id}>
           <Card.Body>
-            <Card.Title>{value.title}</Card.Title>
-            <Card.Text>{`Descrition : ${value.description}`}</Card.Text>
-            <Card.Text>{`Prix : ${value.price} €`}</Card.Text>
+            <Card.Title>{property.title}</Card.Title>
+            <Card.Text>{`Descrition : ${property.description}`}</Card.Text>
+            <Card.Text>{`Prix : ${property.price} €`}</Card.Text>
+            <Button><Link to={{pathname: `/properties/${property.id}`}}>Voir la propriété</Link></Button>
           </Card.Body>
         </Card>
       )
-      })}
-        
+      })}      
       </CardDeck>
     </Container>
   );

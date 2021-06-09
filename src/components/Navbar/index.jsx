@@ -26,7 +26,7 @@ const Navbar = () => {
               ) : (
                 <>
                   <li className="pe-3">
-                    <Link to="/user">Profil</Link>
+                    <Link to="/user/me">Profil</Link>
                   </li>
                   <li className="pe-3">
                     <Link to="/logout">Se déconnecter</Link>

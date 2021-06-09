@@ -3,12 +3,13 @@ import { Container } from "react-bootstrap";
 // import { Link } from "react-router-dom";
 import UserProfile from "components/UserProfile";
 import CreatePost from "components/CreatePost";
-import "./style.scss";
+import { UserManager } from "services";
+// import "./style.scss";
 
 const Profile = () => {
-  // const auth = useSelector((store) => store.isLogged);
-  const [isUserProfile, setIsUserProfile] = useState(true);
+  const [isUserProfile, setIsUserProfile] = useState(false);
   const [isCreatePost, setIsCreatePost] = useState(false);
+  const [userDetails, setUserDetails] = useState(undefined); 
 
   const onUserProfile = () => {
     setIsUserProfile(true);
@@ -17,15 +18,22 @@ const Profile = () => {
 
   console.log(isUserProfile);
   console.log(isCreatePost);
-  const onCreatePost = () => {
-    // event.preventDefault();
+  const onCreatePost = (event) => {
+    event.preventDefault();
     setIsUserProfile(false);
     setIsCreatePost(true);
   };
 
-  useEffect(()=> {
-
-  },[isUserProfile, isCreatePost]);
+  useEffect(() => {
+    UserManager.getProfile().then((response) => {
+      setUserDetails(response);
+      console.log(`useEffect: ${userDetails}`);
+    });
+    UserManager.getProfile().then((response) => {
+      setUserDetails(response);
+      console.log(`useEffect: ${userDetails}`);
+    });
+  },[]);
 
   return (
     <Container>
@@ -38,7 +46,7 @@ const Profile = () => {
           <button className="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button>
         </div>
         <div className="tab-content" id="v-pills-tabContent">
-          <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">{isUserProfile && <UserProfile />}</div>
+          <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">{isUserProfile && <UserProfile user={userDetails}/>}</div>
           <div className="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">{isCreatePost && <CreatePost />}</div>
           <div className="tab-pane fade show active" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"></div>
         </div>

@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import SearchBar from "components/SearchBar";
 import { useSelector } from "react-redux";
 import { PropertiesManager } from "services";
+import PropertyCard from 'components/PropertyCard';
 
 const Home = () => {
   const [propertiesList, setPropertiesList] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const auth = useSelector((store) => store.isLogged);
 
   const fetchPropertiesList = () => {
@@ -19,6 +21,14 @@ const Home = () => {
   useEffect(() => {
     fetchPropertiesList();
   }, []);
+
+  useEffect(() => {
+    setFilteredData(propertiesList);
+  }, [propertiesList]);
+
+  const searchBarResult = (searchBarData) => {
+    setFilteredData(searchBarData);
+  };
 
   return (
     <div className="pb-5">
@@ -66,24 +76,12 @@ const Home = () => {
             </Card>
           </Col>
         </Row>
-        <SearchBar data={propertiesList} />
+
+        <SearchBar data={propertiesList} filtered={searchBarResult}/>
         <p>Consultez la liste de nos annonces</p>
-        <Row>
-          {propertiesList.map((property) => (
-            <Card key={property.id}>
-              <Card.Body>
-                <Card.Title> {property.title} </Card.Title>
-                <Card.Text>{`descrition : ${property.description}`}</Card.Text>
-                <Card.Text>{`price: ${property.price / 100} €`}</Card.Text>
-                <Button>
-                  <Link to={{ pathname: `/properties/${property.id}` }}>
-                    Voir la proriété
-                  </Link>
-                </Button>
-              </Card.Body>
-            </Card>
-          ))}
-        </Row>
+        <div className="mt-5">
+        <PropertyCard data={filteredData} />
+      </div>
       </Container>
     </div>
   );

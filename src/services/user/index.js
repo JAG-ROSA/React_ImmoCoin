@@ -24,12 +24,12 @@ export default class UserManager {
   }
 
   static async getProfile() {
-    const response = await API.post("/users/me");
+    const response = await API.get(`/users/${Cookies.get(USER_ID)}`);
     return response.data;
   }
 
   static async updateProfile(user) {
-    const response = await API.put("/users", user);
+    const response = await API.put(`/users/${Cookies.get(USER_ID)}`, user);
     return response.data;
   }
 }

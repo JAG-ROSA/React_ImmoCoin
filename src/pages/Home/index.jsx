@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Jumbotron, Button, Container, Row, Col, Card } from "react-bootstrap";
-import BannerImage from "assets/images/01_happy_woman.jpg";
+import { Jumbotron, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import SearchBar from "components/SearchBar";
 import { useSelector } from "react-redux";

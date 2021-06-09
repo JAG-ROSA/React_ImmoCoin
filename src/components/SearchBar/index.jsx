@@ -23,14 +23,6 @@ const SearchBar = ({data, filtered}) => {
     setDisabled(disabled);
   };
 
-  const onChangeMin = (value) => {
-    setInputValueMin(value);
-  };
-
-  const onChangeMax = (value) => {
-    setInputValueMax(value);
-  };
-
   const onChange = (value) => {
     setInputValueMin(value[0]);
     setInputValueMax(value[1]);

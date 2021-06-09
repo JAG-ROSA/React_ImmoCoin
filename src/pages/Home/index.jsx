@@ -1,26 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Jumbotron, Button, Container, Row, Col, Card } from "react-bootstrap";
 import BannerImage from "assets/images/01_happy_woman.jpg";
-import { BASE_URL } from "config";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { PropertiesManager } from "services";
 
 const Home = () => {
   const [propertiesList, setPropertiesList] = useState([]);
   const auth = useSelector((store) => store.isLogged);
 
   const fetchPropertiesList = async () => {
-    const URL = `${BASE_URL}/properties`;
-    const fetchPostList = await fetch(URL, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: `Bearer ${Cookies.get(TOKEN)}`,
-      },
-    });
-    const response = await fetchPostList.json();
-    console.log(response);
-    setPropertiesList(response);
+    PropertiesManager.indexProperties().then((response) =>
+      setPropertiesList(response)
+    );
   };
 
   useEffect(() => {

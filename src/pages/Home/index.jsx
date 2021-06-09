@@ -1,31 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Jumbotron, Button, Container, Row, Col, Card } from "react-bootstrap";
 import BannerImage from "assets/images/01_happy_woman.jpg";
-import { BASE_URL } from "config";
 import { Link } from "react-router-dom";
+import SearchBar from 'components/SearchBar'
 import { useSelector } from "react-redux";
+import { PropertiesManager } from "services";
+import PropertyCard from 'components/PropertyCard';
 
 const Home = () => {
   const [propertiesList, setPropertiesList] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const auth = useSelector((store) => store.isLogged);
 
   const fetchPropertiesList = async () => {
-    const URL = `${BASE_URL}/properties`;
-    const fetchPostList = await fetch(URL, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: `Bearer ${Cookies.get(TOKEN)}`,
-      },
-    });
-    const response = await fetchPostList.json();
-    console.log(response);
-    setPropertiesList(response);
+    PropertiesManager.indexProperties().then((response) =>
+      setPropertiesList(response)
+    );
   };
 
   useEffect(() => {
     fetchPropertiesList();
   }, []);
+
+  useEffect(() => {
+    setFilteredData(propertiesList);
+  }, [propertiesList]);
+
+  const searchBarResult = (searchBarData) => {
+    setFilteredData(searchBarData);
+  };
 
   return (
     <div className="pb-5">
@@ -73,18 +76,11 @@ const Home = () => {
             </Card>
           </Col>
         </Row>
+        <SearchBar data={propertiesList} filtered={searchBarResult}/>
         <p>Consultez la liste de nos annonces</p>
-        <Row>
-          {propertiesList.map((property) => (
-            <Card key={property.id}>
-              <Card.Body>
-                <Card.Title> {property.title} </Card.Title>
-                <Card.Text>{`descrition : ${property.description}`}</Card.Text>
-                <Card.Text>{`price: ${property.price / 100} €`}</Card.Text>
-              </Card.Body>
-            </Card>
-          ))}
-        </Row>
+        <div className="mt-5">
+        <PropertyCard data={filteredData} />
+      </div>
       </Container>
     </div>
   );

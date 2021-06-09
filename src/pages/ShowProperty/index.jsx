@@ -16,7 +16,7 @@ const ShowProperty = () => {
 
   return (
     <>
-      {currentProperty != undefined ? (
+      {currentProperty !== undefined ? (
         <div className="ShowProperty">
           <h1>{currentProperty.property.title}</h1>
           <p>{currentProperty.property.description}</p>

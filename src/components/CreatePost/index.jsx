@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 
 const CreatePost = () => (
-  <div> 
     <Form>
       <Form.Group controlId="formTitle">
         <Form.Label>Titre</Form.Label>
@@ -23,7 +22,6 @@ const CreatePost = () => (
         Submit
       </Button>
     </Form>
-  </div>
 );
 
 export default CreatePost;

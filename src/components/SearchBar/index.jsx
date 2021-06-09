@@ -9,10 +9,6 @@ const SearchBar = ({data, filtered}) => {
   const [inputValueMax, setInputValueMax] = useState(500000);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const searchData = (value) => {
-    filtered(value);
-  };
-
   useEffect(() =>{
     setFilteredData(data);
   }, [data]);
@@ -39,6 +35,10 @@ const SearchBar = ({data, filtered}) => {
   };
 
   useEffect(() => {
+    const searchData = (value) => {
+      filtered(value);
+    };
+
     const filter = (min, max, value) => {
       console.log(min)
       console.log(max)
@@ -50,7 +50,7 @@ const SearchBar = ({data, filtered}) => {
       searchData(filteredData);
     }
     disabled ? filter(0, 1000000, searchTerm) : filter(inputValueMin, inputValueMax, searchTerm);    
-  }, [inputValueMin, inputValueMax, data, disabled, searchTerm, filteredData, searchData]);
+  }, [inputValueMin, inputValueMax, data, disabled, searchTerm, filteredData, filtered]);
 
   
   return (

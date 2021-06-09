@@ -12,7 +12,7 @@ const Home = () => {
   const [filteredData, setFilteredData] = useState([]);
   const auth = useSelector((store) => store.isLogged);
 
-  const fetchPropertiesList = async () => {
+  const fetchPropertiesList = () => {
     PropertiesManager.indexProperties().then((response) =>
       setPropertiesList(response)
     );

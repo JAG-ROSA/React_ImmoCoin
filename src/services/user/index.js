@@ -29,7 +29,7 @@ export default class UserManager {
   }
 
   static async updateProfile(user) {
-    const response = await API.put("/users", user);
+    const response = await API.put(`/users/${Cookies.get(USER_ID)}`, user);
     return response.data;
   }
 }

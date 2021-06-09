@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { Slider, Switch, InputNumber, Row, Col } from 'antd';
+import { Slider, Switch, Row, Col } from 'antd';
 import { Form } from "react-bootstrap";
+import './style.scss';
 
 const SearchBar = ({data, filtered}) => {
   const [filteredData, setFilteredData] = useState([]);
@@ -22,14 +23,6 @@ const SearchBar = ({data, filtered}) => {
     setDisabled(disabled);
   };
 
-  const onChangeMin = (value) => {
-    setInputValueMin(value);
-  };
-
-  const onChangeMax = (value) => {
-    setInputValueMax(value);
-  };
-
   const onChange = (value) => {
     setInputValueMin(value[0]);
     setInputValueMax(value[1]);
@@ -40,10 +33,7 @@ const SearchBar = ({data, filtered}) => {
   };
 
   useEffect(() => {
-
     const filter = (min, max, value) => {
-      console.log(min)
-      console.log(max)
       let result = [];
       result = data.filter((data) => {
       return (data.price >= min && data.price <= max && (data.title.toLowerCase().search(value) !== -1 || data.description.toLowerCase().search(value) !== -1));
@@ -58,22 +48,14 @@ const SearchBar = ({data, filtered}) => {
   return (
     <div>
       <Form>
-        <Form.Group controlId="searchTerme" className="mb-3">
-          <Form.Control type="text" placeholder="Je recherche..." onChange={(e) =>handleSearch(e)}/>
-        </Form.Group>
+        <div className="d-flex justify-content-center">
+          <Form.Group controlId="searchTerme" className="col-3 mb-3">
+            <Form.Control type="text" placeholder="Je recherche..." className="text-center" onChange={(e) =>handleSearch(e)}/>
+          </Form.Group>
+        </div>
       </Form>
-      <Row justify="center">
-        <Col span={3}>
-            <InputNumber
-              min={1}
-              max={1000000}
-              step={1000}
-              style={{ margin: '0 16px' }}
-              value={inputValueMin}
-              onChange={onChangeMin}
-              disabled={disabled}
-            />
-        </Col>
+      <Row className="d-flex justify-content-center">
+        <p className="my-text-tertiary fs-5 pe-3">{inputValueMin} €</p>
         <Col span={12}>
           <Slider 
             range
@@ -85,19 +67,13 @@ const SearchBar = ({data, filtered}) => {
             onChange={onChange}
           />
         </Col>
-        <Col span={3}>
-          <InputNumber
-            min={1}
-            max={1000000}
-            step={1000}
-            style={{ margin: '0 16px' }}
-            value={inputValueMax}
-            onChange={onChangeMax}
-            disabled={disabled}
-          />
-        </Col>
+        <p className="my-text-tertiary fs-5 ps-3">{inputValueMax} €</p>
       </Row>
-      Désactiver la recherche par prix: <Switch size="small" checked={disabled} onChange={handleDisabledChange}/>  
+      Désactiver la recherche par prix: <Switch size="small" checked={disabled} onChange={handleDisabledChange}/> 
+       {/* <div className="d-flex justify-content-center align-items-center form-check form-switch">
+        <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"  onChange={handleDisabledChange}></input>
+        <label className="form-check-label ps-2" for="flexSwitchCheckDefault">Désactiver la recherche par prix</label>
+      </div> */}
     </div>
   );
 };

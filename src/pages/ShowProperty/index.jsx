@@ -12,7 +12,7 @@ const ShowProperty = () => {
         setCurrentProperty(data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [propId]);
 
   return (
     <>

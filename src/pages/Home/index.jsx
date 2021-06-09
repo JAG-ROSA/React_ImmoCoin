@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Jumbotron, Button, Container, Row, Col, Card } from "react-bootstrap";
 import BannerImage from "assets/images/01_happy_woman.jpg";
 import { Link } from "react-router-dom";
-import SearchBar from 'components/SearchBar'
+import SearchBar from "components/SearchBar";
 import { useSelector } from "react-redux";
 import { PropertiesManager } from "services";
 
@@ -10,10 +10,10 @@ const Home = () => {
   const [propertiesList, setPropertiesList] = useState([]);
   const auth = useSelector((store) => store.isLogged);
 
-  const fetchPropertiesList = async () => {
-    PropertiesManager.indexProperties().then((response) =>
-      setPropertiesList(response)
-    );
+  const fetchPropertiesList = () => {
+    PropertiesManager.indexProperties()
+      .then((response) => setPropertiesList(response))
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Home = () => {
             </Card>
           </Col>
         </Row>
-        <SearchBar data={propertiesList}/>
+        <SearchBar data={propertiesList} />
         <p>Consultez la liste de nos annonces</p>
         <Row>
           {propertiesList.map((property) => (
@@ -75,6 +75,11 @@ const Home = () => {
                 <Card.Title> {property.title} </Card.Title>
                 <Card.Text>{`descrition : ${property.description}`}</Card.Text>
                 <Card.Text>{`price: ${property.price / 100} €`}</Card.Text>
+                <Button>
+                  <Link to={{ pathname: `/properties/${property.id}` }}>
+                    Voir la proriété
+                  </Link>
+                </Button>
               </Card.Body>
             </Card>
           ))}

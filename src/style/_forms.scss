@@ -28,3 +28,13 @@ button:focus,
   box-shadow: none;
   outline: none;
 }
+
+
+.form-check-input:checked, .form-check-input:focus {
+  background-color: #F25430;
+  border-color: #F25430;
+  color: #F25430;
+  border: none;
+  box-shadow: none;
+  outline: none;
+}

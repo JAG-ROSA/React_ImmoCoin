@@ -2,57 +2,61 @@ import React, { useEffect, useState } from "react";
 import { Slider, Switch, InputNumber, Row, Col } from 'antd';
 import { Form } from "react-bootstrap";
 
-const SearchBar = ({data}) => {
-  const [filteredData, setFilteredData] = useState([])
-  const [disabled, setDisabled] = useState(false)
-  const [inputValueMin, setInputValueMin] = useState(100000)
-  const [inputValueMax, setInputValueMax] = useState(500000)
-  const [searchTerm, setSearchTerm] = useState("")
+const SearchBar = ({data, filtered}) => {
+  const [filteredData, setFilteredData] = useState([]);
+  const [disabled, setDisabled] = useState(false);
+  const [inputValueMin, setInputValueMin] = useState(100000);
+  const [inputValueMax, setInputValueMax] = useState(500000);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const searchData = (value) => {
+    filtered(value)
+  };
 
   useEffect(() =>{
-    setFilteredData(data)
-  }, [data])
+    setFilteredData(data);
+  }, [data]);
   
   const handleSearch = (e) => {
-    setSearchTerm(e.target.value.toLowerCase())
-  }
+    setSearchTerm(e.target.value.toLowerCase());
+  };
 
   const handleDisabledChange = (disabled) => {
-    setDisabled(disabled)
-  }
+    setDisabled(disabled);
+  };
 
   const onChangeMin = (value) => {
-    setInputValueMin(value)
+    setInputValueMin(value);
   };
 
   const onChangeMax = (value) => {
-    setInputValueMax(value)
+    setInputValueMax(value);
   };
 
   const onChange = (value) => {
-    setInputValueMin(value[0])
-    setInputValueMax(value[1])
+    setInputValueMin(value[0]);
+    setInputValueMax(value[1]);
   };
 
   useEffect(() =>{
-    const filtered = (min, max, value) => {
+    const filter = (min, max, value) => {
+      console.log(min)
+      console.log(max)
       let result = [];
       result = data.filter((data) => {
       return (data.price >= min && data.price <= max && (data.title.toLowerCase().search(value) !== -1 || data.description.toLowerCase().search(value) !== -1));
       });
       setFilteredData(result);
-    }
-
-    if (disabled === false) {
-      filtered(inputValueMin, inputValueMax, searchTerm)
-    } else {
-      filtered(0, 1000000, searchTerm)
+      searchData(filteredData)
     }
     
-  }, [inputValueMin, inputValueMax, data, disabled, searchTerm])
+    console.log(disabled)
+    disabled ? filter(0, 1000000, searchTerm) : filter(inputValueMin, inputValueMax, searchTerm);    
+  }, [inputValueMin, inputValueMax, data, disabled, searchTerm, filteredData]);
 
+  
   return (
-    <div className="App">
+    <div>
       <Form>
         <Form.Group controlId="searchTerme" className="mb-3">
           <Form.Control type="text" placeholder="Je recherche..." onChange={(e) =>handleSearch(e)}/>
@@ -93,20 +97,7 @@ const SearchBar = ({data}) => {
           />
         </Col>
       </Row>
-      Désactiver la recherche par prix: <Switch size="small" checked={disabled} onChange={handleDisabledChange}/>
-
-      <div className="mt-5">
-      {filteredData.map((value,index)=>{
-      return(
-      <div key={value.id}>
-
-      {value.title}<br/>
-      {value.description}<br/>
-      {value.price}<br/><br/>
-      </div>
-      )
-      })}
-      </div>
+      Désactiver la recherche par prix: <Switch size="small" checked={disabled} onChange={handleDisabledChange}/>  
     </div>
   );
 };

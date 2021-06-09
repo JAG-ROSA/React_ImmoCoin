@@ -50,7 +50,7 @@ const SearchBar = ({data, filtered}) => {
       searchData(filteredData);
     }
     disabled ? filter(0, 1000000, searchTerm) : filter(inputValueMin, inputValueMax, searchTerm);    
-  }, [inputValueMin, inputValueMax, data, disabled, searchTerm, filteredData]);
+  }, [inputValueMin, inputValueMax, data, disabled, searchTerm, filteredData, searchData]);
 
   
   return (

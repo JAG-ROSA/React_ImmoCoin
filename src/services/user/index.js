@@ -24,7 +24,7 @@ export default class UserManager {
   }
 
   static async getProfile() {
-    const response = await API.post("/users/me");
+    const response = await API.get(`/users/${Cookies.get(USER_ID)}`);
     return response.data;
   }
 

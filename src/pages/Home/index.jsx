@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Jumbotron, Button, Container, Row, Col, Card } from "react-bootstrap";
 import BannerImage from "assets/images/01_happy_woman.jpg";
 import { Link } from "react-router-dom";
-import SearchBar from 'components/SearchBar'
+import SearchBar from "components/SearchBar";
 import { useSelector } from "react-redux";
 import { PropertiesManager } from "services";
 import PropertyCard from 'components/PropertyCard';
@@ -13,9 +13,9 @@ const Home = () => {
   const auth = useSelector((store) => store.isLogged);
 
   const fetchPropertiesList = () => {
-    PropertiesManager.indexProperties().then((response) =>
-      setPropertiesList(response)
-    );
+    PropertiesManager.indexProperties()
+      .then((response) => setPropertiesList(response))
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
@@ -76,6 +76,7 @@ const Home = () => {
             </Card>
           </Col>
         </Row>
+
         <SearchBar data={propertiesList} filtered={searchBarResult}/>
         <p>Consultez la liste de nos annonces</p>
         <div className="mt-5">

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Slider, Switch, InputNumber, Row, Col } from 'antd';
 import { Form } from "react-bootstrap";
@@ -34,10 +35,11 @@ const SearchBar = ({data, filtered}) => {
     setInputValueMax(value[1]);
   };
 
+  const searchData = (value) => {
+    filtered(value);
+  };
+
   useEffect(() => {
-    const searchData = (value) => {
-      filtered(value);
-    };
 
     const filter = (min, max, value) => {
       console.log(min)
@@ -50,7 +52,7 @@ const SearchBar = ({data, filtered}) => {
       searchData(filteredData);
     }
     disabled ? filter(0, 1000000, searchTerm) : filter(inputValueMin, inputValueMax, searchTerm);    
-  }, [inputValueMin, inputValueMax, data, disabled, searchTerm, filteredData, filtered]);
+  }, [inputValueMin, inputValueMax, data, disabled, searchTerm]);
 
   
   return (

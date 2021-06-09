@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Slider, Switch } from 'antd';
 
 const SearchBar = ({data}) => {
   const [filteredData, setFilteredData] = useState([])
+  const [disabled, setDisabled] = useState(true)
 
   useEffect(() =>{
     setFilteredData(data)
@@ -19,12 +21,19 @@ const SearchBar = ({data}) => {
     setFilteredData(result);
   }
 
+  const handleDisabledChange = (disabled) => {
+    setDisabled(disabled)
+  }
+
   return (
     <div className="App">
       <div style={{ margin: '0 auto', marginTop: '10%' }}>
         <label>Search title:</label>
         <input id="titleSearch" type="text" onChange={(e) =>handleSearch(e)} />
       </div>
+      <Slider range min={0} max={1000000} step={1000}defaultValue={[100000, 500000]} disabled={disabled} />
+      Disabled: <Switch size="small" checked={disabled} onChange={handleDisabledChange} />
+
       <div style={{padding:10}}>
       {filteredData.map((value,index)=>{
       return(

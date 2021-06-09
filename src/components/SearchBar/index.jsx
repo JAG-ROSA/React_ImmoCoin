@@ -6,21 +6,14 @@ const SearchBar = ({data}) => {
   const [disabled, setDisabled] = useState(false)
   const [inputValueMin, setInputValueMin] = useState(100000)
   const [inputValueMax, setInputValueMax] = useState(500000)
+  const [searchValue, setSearchValue] = useState("")
 
   useEffect(() =>{
     setFilteredData(data)
   }, [data])
   
-  console.log(filteredData)
   const handleSearch = (e) => {
-    let value = e.target.value.toLowerCase();
-    let result = [];
-    console.log(value);
-    result = data.filter((data) => {
-    return (data.title.toLowerCase().search(value) !== -1 || data.description.toLowerCase().search(value) !== -1);
-    });
-    console.log(result)
-    setFilteredData(result);
+    setSearchValue(e.target.value.toLowerCase())
   }
 
   const handleDisabledChange = (disabled) => {
@@ -40,6 +33,24 @@ const SearchBar = ({data}) => {
     setInputValueMax(value[1])
   };
 
+  
+  useEffect(() =>{
+    const filterNumber = (min, max, value) => {
+      let result = [];
+      result = data.filter((data) => {
+      return (data.price >= min && data.price <= max && (data.title.toLowerCase().search(value) !== -1 || data.description.toLowerCase().search(value) !== -1));
+      });
+      setFilteredData(result);
+    }
+
+    if (disabled === false) {
+      filterNumber(inputValueMin, inputValueMax, searchValue)
+    } else {
+      filterNumber(0, 1000000, searchValue)
+    }
+    
+  }, [inputValueMin, inputValueMax, data, disabled, searchValue])
+
   return (
     <div className="App">
       <div style={{ margin: '0 auto', marginTop: '10%' }}>
@@ -55,6 +66,7 @@ const SearchBar = ({data}) => {
             style={{ margin: '0 16px' }}
             value={inputValueMin}
             onChange={onChangeMin}
+            disabled={disabled}
           />
         </Col>
         <Col span={12}>
@@ -68,6 +80,7 @@ const SearchBar = ({data}) => {
             style={{ margin: '0 16px' }}
             value={inputValueMax}
             onChange={onChangeMax}
+            disabled={disabled}
           />
         </Col>
       </Row>
@@ -79,8 +92,8 @@ const SearchBar = ({data}) => {
       <div key={value.id}>
 
       {value.title}<br/>
-      {value.description}<br/><br/>
-      {value.description.price}<br/>
+      {value.description}<br/>
+      {value.price}<br/><br/>
       </div>
       )
       })}

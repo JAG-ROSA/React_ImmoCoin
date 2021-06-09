@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Slider, Switch, InputNumber, Row, Col } from 'antd';
+import { Form } from "react-bootstrap";
 
 const SearchBar = ({data}) => {
   const [filteredData, setFilteredData] = useState([])
   const [disabled, setDisabled] = useState(false)
   const [inputValueMin, setInputValueMin] = useState(100000)
   const [inputValueMax, setInputValueMax] = useState(500000)
-  const [searchValue, setSearchValue] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() =>{
     setFilteredData(data)
   }, [data])
   
   const handleSearch = (e) => {
-    setSearchValue(e.target.value.toLowerCase())
+    setSearchTerm(e.target.value.toLowerCase())
   }
 
   const handleDisabledChange = (disabled) => {
@@ -33,9 +34,8 @@ const SearchBar = ({data}) => {
     setInputValueMax(value[1])
   };
 
-  
   useEffect(() =>{
-    const filterNumber = (min, max, value) => {
+    const filtered = (min, max, value) => {
       let result = [];
       result = data.filter((data) => {
       return (data.price >= min && data.price <= max && (data.title.toLowerCase().search(value) !== -1 || data.description.toLowerCase().search(value) !== -1));
@@ -44,35 +44,44 @@ const SearchBar = ({data}) => {
     }
 
     if (disabled === false) {
-      filterNumber(inputValueMin, inputValueMax, searchValue)
+      filtered(inputValueMin, inputValueMax, searchTerm)
     } else {
-      filterNumber(0, 1000000, searchValue)
+      filtered(0, 1000000, searchTerm)
     }
     
-  }, [inputValueMin, inputValueMax, data, disabled, searchValue])
+  }, [inputValueMin, inputValueMax, data, disabled, searchTerm])
 
   return (
     <div className="App">
-      <div style={{ margin: '0 auto', marginTop: '10%' }}>
-        <label>Search title:</label>
-        <input id="titleSearch" type="text" onChange={(e) =>handleSearch(e)} />
-      </div>
-      <Row>
-      <Col span={4}>
-          <InputNumber
-            min={1}
-            max={1000000}
-            step={1000}
-            style={{ margin: '0 16px' }}
-            value={inputValueMin}
-            onChange={onChangeMin}
-            disabled={disabled}
-          />
+      <Form>
+        <Form.Group controlId="searchTerme" className="mb-3">
+          <Form.Control type="text" placeholder="Je recherche..." onChange={(e) =>handleSearch(e)}/>
+        </Form.Group>
+      </Form>
+      <Row justify="center">
+        <Col span={3}>
+            <InputNumber
+              min={1}
+              max={1000000}
+              step={1000}
+              style={{ margin: '0 16px' }}
+              value={inputValueMin}
+              onChange={onChangeMin}
+              disabled={disabled}
+            />
         </Col>
         <Col span={12}>
-      <Slider range min={0} max={1000000} step={1000} value={[inputValueMin, inputValueMax]} disabled={disabled} onChange={onChange}/>
+          <Slider 
+            range
+            min={0}
+            max={1000000}
+            step={1000}
+            value={[inputValueMin, inputValueMax]}
+            disabled={disabled}
+            onChange={onChange}
+          />
         </Col>
-        <Col span={4}>
+        <Col span={3}>
           <InputNumber
             min={1}
             max={1000000}
@@ -84,9 +93,9 @@ const SearchBar = ({data}) => {
           />
         </Col>
       </Row>
-      Disabled: <Switch size="small" checked={disabled} onChange={handleDisabledChange} />
+      Désactiver la recherche par prix: <Switch size="small" checked={disabled} onChange={handleDisabledChange}/>
 
-      <div style={{padding:10}}>
+      <div className="mt-5">
       {filteredData.map((value,index)=>{
       return(
       <div key={value.id}>

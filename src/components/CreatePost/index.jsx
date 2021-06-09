@@ -1,7 +1,9 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
 
-const CreatePost = () => (
+const CreatePost = () => {
+ 
+  return (
     <Form>
       <Form.Group controlId="formTitle">
         <Form.Label>Titre</Form.Label>
@@ -22,6 +24,7 @@ const CreatePost = () => (
         Submit
       </Button>
     </Form>
-);
+  );
+};
 
 export default CreatePost;

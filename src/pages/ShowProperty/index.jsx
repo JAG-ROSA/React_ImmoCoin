@@ -28,7 +28,7 @@ const ShowProperty = () => {
         <div className="ShowProperty">
           <h1>{currentProperty.property.title}</h1>
           <div className="show-property-content">
-            <img src={House} />
+            <img src={House} alt={currentProperty.property.title}/>
             <div className="show-property-infos">
               <p className="show-property-price">
                 <RiMoneyEuroCircleLine className="my-mr my-medium" />

@@ -42,7 +42,7 @@ const Register = () => {
   return (
     <Container>
       <div className="d-flex justify-content-center align-items-center">
-        <div className="col-sm-5 col-lg-4 my-bg-light border-quaternary p-4 my-5">
+        <div className="col col-md-8 col-lg-5 my-bg-light border-quaternary p-4 my-5 mx-3">
           <h2 className=" my-text-tertiary">S'inscrire</h2>
 
           <Form onSubmit={registerFetch}>
@@ -51,18 +51,18 @@ const Register = () => {
               <Form.Control
                 size="sm"
                 type="email"
-                placeholder="name@example.com"
+                placeholder="nom@example.com"
               />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword" className="pb-3">
               <Form.Label>Mot de passe</Form.Label>
-              <Form.Control size="sm" type="password" placeholder="Password" />
+              <Form.Control size="sm" type="password" placeholder="Mot de passe" />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword2">
               <Form.Label>Confirmer le mot de passe</Form.Label>
-              <Form.Control size="sm" type="password" placeholder="Password" />
+              <Form.Control size="sm" type="password" placeholder="Confirmer le mot de passe" />
             </Form.Group>
             <Button
               variant="primary"

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { Slider, Switch, Row, Col } from 'antd';
 import { Form } from "react-bootstrap";
-import './style.scss';
 
 const SearchBar = ({data, filtered}) => {
   const [filteredData, setFilteredData] = useState([]);
@@ -28,10 +27,6 @@ const SearchBar = ({data, filtered}) => {
     setInputValueMax(value[1]);
   };
 
-  const searchData = (value) => {
-    filtered(value);
-  };
-
   useEffect(() => {
     const filter = (min, max, value) => {
       let result = [];
@@ -39,23 +34,29 @@ const SearchBar = ({data, filtered}) => {
       return (data.price >= min && data.price <= max && (data.title.toLowerCase().search(value) !== -1 || data.description.toLowerCase().search(value) !== -1));
       });
       setFilteredData(result);
-      searchData(filteredData);
     }
     disabled ? filter(0, 1000000, searchTerm) : filter(inputValueMin, inputValueMax, searchTerm);    
   }, [inputValueMin, inputValueMax, data, disabled, searchTerm]);
 
-  
+  useEffect(() => {
+    const searchData = (value) => {
+      filtered(value);
+    };
+
+    searchData(filteredData);
+  }, [filteredData]);
+
   return (
     <div>
       <Form>
         <div className="d-flex justify-content-center">
-          <Form.Group controlId="searchTerme" className="col-3 mb-3">
+          <Form.Group controlId="searchTerme" className="col-md-3 mb-3">
             <Form.Control type="text" placeholder="Je recherche..." className="text-center" onChange={(e) =>handleSearch(e)}/>
           </Form.Group>
         </div>
       </Form>
-      <Row className="d-flex justify-content-center">
-        <p className="my-text-tertiary fs-5 pe-3">{inputValueMin} €</p>
+      <Row className="d-flex justify-content-center ">
+        <p className="my-text-tertiary open-sans-semi-bold pe-3">{inputValueMin} €</p>
         <Col span={12}>
           <Slider 
             range
@@ -67,13 +68,9 @@ const SearchBar = ({data, filtered}) => {
             onChange={onChange}
           />
         </Col>
-        <p className="my-text-tertiary fs-5 ps-3">{inputValueMax} €</p>
+        <p className="my-text-tertiary open-sans-semi-bold ps-3">{inputValueMax} €</p>
       </Row>
-      Désactiver la recherche par prix: <Switch size="small" checked={disabled} onChange={handleDisabledChange}/> 
-       {/* <div className="d-flex justify-content-center align-items-center form-check form-switch">
-        <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"  onChange={handleDisabledChange}></input>
-        <label className="form-check-label ps-2" for="flexSwitchCheckDefault">Désactiver la recherche par prix</label>
-      </div> */}
+      Désactiver la recherche par prix: <Switch size="small" checked={disabled} onChange={handleDisabledChange}/>
     </div>
   );
 };

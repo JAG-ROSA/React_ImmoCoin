@@ -40,6 +40,7 @@ const App = () => (
         </Route>
         <Route path="/property/edit">
           <EditProperty />
+        </Route>
         <Route path="/password/forgot">
           <ForgotPassword />
         </Route>

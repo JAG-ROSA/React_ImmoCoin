@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { BsFillEnvelopeFill, BsJustifyLeft } from "react-icons/bs";
+import { BsFillEnvelopeFill, BsJustifyLeft, BsHouse } from "react-icons/bs";
 import { RiMoneyEuroCircleLine } from "react-icons/ri";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 import { CgLogIn } from "react-icons/cg";
 import { PropertiesManager } from "services";
 import House from "assets/images/02_house.jpg";
@@ -33,7 +34,15 @@ const ShowProperty = () => {
             <div className="show-property-infos">
               <p className="show-property-price">
                 <RiMoneyEuroCircleLine className="my-mr my-medium" />
-                <strong>{currentProperty.property.price} €</strong>
+                <strong className="align-middle">{currentProperty.property.price} €</strong>
+              </p>
+              <p className="show-property-location">
+                <HiOutlineLocationMarker className="my-mr my-medium" />
+                <strong className="align-middle">{currentProperty.property.location}</strong>
+              </p>
+              <p className="show-property-category">
+                <BsHouse className="my-mr my-medium" />
+                <strong className="align-middle">{currentProperty.property.category}</strong>
               </p>
               <p className="show-property-email">
                 {auth ? (
@@ -53,13 +62,13 @@ const ShowProperty = () => {
                       }}
                       className="contact-email"
                     >
-                      <CgLogIn className="my-medium" /> Se connecter
+                      <CgLogIn className="my-medium" /> <span className="align-middle">Se Connecter</span>
                     </Link>
                   </div>
                 )}
                 <p className="contact-label">
-                  <BsFillEnvelopeFill className="my-mr my-medium" /> Contacter
-                  le vendeur
+                  <BsFillEnvelopeFill className="my-mr my-medium" /> <span className="align-middle">Contacter
+                  le vendeur</span>
                 </p>
               </p>
             </div>

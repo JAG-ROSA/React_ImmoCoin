@@ -25,7 +25,9 @@
         font-size: large;
       }
       .show-property-email,
-      .show-property-price {
+      .show-property-price,
+      .show-property-location,
+      .show-property-category {
         color: $tertiary-color;
         align-items: center;
         .my-mr {

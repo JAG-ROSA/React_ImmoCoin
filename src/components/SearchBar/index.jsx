@@ -9,6 +9,8 @@ const SearchBar = ({data, filtered}) => {
   const [inputValueMin, setInputValueMin] = useState(100000);
   const [inputValueMax, setInputValueMax] = useState(500000);
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchLocation, setSearchLocation] = useState("");
+
 
   useEffect(() =>{
     setFilteredData(data);
@@ -16,6 +18,9 @@ const SearchBar = ({data, filtered}) => {
   
   const handleSearch = (e) => {
     setSearchTerm(e.target.value.toLowerCase());
+  };
+  const handleSearchLocation = (e) => {
+    setSearchLocation(e.target.value.toLowerCase());
   };
 
   const handleDisabledChange = (disabled) => {
@@ -28,15 +33,15 @@ const SearchBar = ({data, filtered}) => {
   };
 
   useEffect(() => {
-    const filter = (min, max, value) => {
+    const filter = (min, max, value, location) => {
       let result = [];
       result = data.filter((data) => {
-      return (data.price >= min && data.price <= max && (data.title.toLowerCase().search(value) !== -1 || data.description.toLowerCase().search(value) !== -1));
+      return (data.price >= min && data.price <= max && (data.title.toLowerCase().search(value) !== -1 || data.description.toLowerCase().search(value) !== -1) && data.location.toLowerCase().search(location) !== -1);
       });
       setFilteredData(result);
     }
-    disabled ? filter(0, 1000000, searchTerm) : filter(inputValueMin, inputValueMax, searchTerm);    
-  }, [inputValueMin, inputValueMax, data, disabled, searchTerm]);
+    disabled ? filter(0, 1000000, searchTerm, searchLocation) : filter(inputValueMin, inputValueMax, searchTerm, searchLocation);    
+  }, [inputValueMin, inputValueMax, data, disabled, searchTerm, searchLocation]);
 
   useEffect(() => {
     const searchData = (value) => {
@@ -52,6 +57,9 @@ const SearchBar = ({data, filtered}) => {
         <div className="d-flex justify-content-center">
           <Form.Group controlId="searchTerme" className="col-md-3 mb-3">
             <Form.Control type="text" placeholder="Je recherche..." className="text-center" onChange={(e) =>handleSearch(e)}/>
+          </Form.Group>
+          <Form.Group controlId="searchTerme" className="col-md-3 mb-3">
+            <Form.Control type="text" placeholder="Où ?" className="text-center" onChange={(e) =>handleSearchLocation(e)}/>
           </Form.Group>
         </div>
       </Form>

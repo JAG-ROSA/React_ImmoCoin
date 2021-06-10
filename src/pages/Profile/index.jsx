@@ -47,8 +47,10 @@ const Profile = () => {
     const title = event.target.formTitle.value;
     const description = event.target.formDescription.value;
     const price = event.target.formPrice.value;
+    const category = event.target.formCategory.value;
+    const location = event.target.formLocation.value;
     PropertiesManager
-      .createProperties(title, description, price)
+      .createProperties(title, description, price, category, location)
       .then(() => {
         getUserProfile();
         UiManager.openNotification("success", "Annonce créée !")

@@ -39,7 +39,7 @@ const CreatePost = ({onCreate}) => (
     <Form.Group as={Row} controlId="formPrice">
       <Form.Label column sm="2">Prix</Form.Label>
       <Col sm="10" className="pt-2">
-        <Form.Control size="sm" type="text" placeholder="Entrez un prix" />
+        <Form.Control size="sm" type="number" placeholder="Entrez un prix" />
       </Col>
     </Form.Group>
 

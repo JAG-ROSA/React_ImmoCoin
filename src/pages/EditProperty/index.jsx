@@ -12,8 +12,18 @@ const EditProperty = () => {
     const title = event.target.formTitleEdit.value;
     const description = event.target.formDescriptionEdit.value;
     const price = event.target.formPriceEdit.value;
-    PropertiesManager.updateProperties(title, description, price, data.data.id);
-    UiManager.openNotification("success", " Annonce mise à jour !");
+    const category = event.target.formCategory.value;
+    const location = event.target.formLocation.value;
+    PropertiesManager.updateProperties(title, description, price, category, location, data.data.id)
+    .then(() => {
+      UiManager.openNotification("success", " Annonce mise à jour !");
+    })
+    .catch((error) => {
+      UiManager.openNotification(
+        "error",
+        "Un des champs est vide !"
+      );
+    });;
   };
 
   return (
@@ -34,7 +44,7 @@ const EditProperty = () => {
 
             <Form.Group controlId="formCategory">
               <Form.Label column sm="2">Catégorie</Form.Label>
-              <Form.Control className="form-select form-select-sm" as="select">
+              <Form.Control className="form-select form-select-sm" as="select" defaultValue={data.data.category}>
                 <option>Appartement</option>
                 <option>Maison</option>
                 <option>Studio</option>
@@ -44,12 +54,12 @@ const EditProperty = () => {
 
             <Form.Group  controlId="formLocation">
               <Form.Label column sm="2">Lieu</Form.Label>
-              <Form.Control size="sm" type="text" placeholder="Entrez votre lieu"/>
+              <Form.Control size="sm" type="text" defaultValue={data.data.location}/>
             </Form.Group>
 
             <Form.Group controlId="formPriceEdit">
               <Form.Label>Prix</Form.Label>
-              <Form.Control size="sm" type=""  defaultValue={data.data.price} />
+              <Form.Control size="sm" type="number"  defaultValue={data.data.price} />
             </Form.Group>
 
             <button type="submit" className="btn btn-secondary mt-4 mb-3">Modifier</button>

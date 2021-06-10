@@ -1,28 +1,29 @@
 import React from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess, loginFailed } from "store/user/userAction";
 import { UiManager, UserManager } from "services";
 
-const Login = () => {
+const ResetPassword = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { token } = useParams()
+  console.log(token)
 
-  const loginFetch = (event) => {
+  const resetPasswordFetch = (event) => {
     event.preventDefault();
     const data = {
-      email: event.target.formBasicEmail.value,
+      
       password: event.target.formBasicPassword.value,
+      token: token,
     };
-    UserManager.loginUser(data.email, data.password)
+    UserManager.resetPassword(data)
       .then((data) => {
-        dispatch(loginSuccess(data.id));
         UiManager.openNotification("success", "Connexion réussie !");
         history.push("/");
       })
       .catch((error) => {
-        dispatch(loginFailed(error.message));
         UiManager.openNotification(
           "error",
           "Hum... il y a une petite erreur..."
@@ -37,12 +38,11 @@ const Login = () => {
           
           <h2 className=" my-text-tertiary">Se connecter</h2>
           
-          <Form onSubmit={loginFetch}>
+          <Form onSubmit={resetPasswordFetch}>
             <Form.Group controlId="formBasicEmail" className="pb-3">
               <Form.Label>Email</Form.Label>
               <Form.Control size="sm" type="email" placeholder="name@example.com" />
             </Form.Group>
-
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Mot de passe</Form.Label>
               <Form.Control size="sm" type="password" placeholder="Password" />
@@ -51,7 +51,7 @@ const Login = () => {
           </Form>
 
           <Link to="/register" className="link-tertiary">S'inscrire</Link>
-          <Link to="/password/forgot" className="link-tertiary">Mot de passe oublié</Link>
+          <Link to="/forgotPassword" className="link-tertiary">Mot de passe oublié</Link>
         
         </div>
       </div>
@@ -59,4 +59,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ResetPassword;

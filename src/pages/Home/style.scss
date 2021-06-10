@@ -1,0 +1,36 @@
+.ant-slider {
+  &-rail {
+    background-color: rgba(0, 35, 11, 0.2);
+  }
+  &-handle, &-handle2 {
+    border-color: #6C7DD9;
+    &:hover, &:focus {
+      box-shadow: none;
+      border-color: #F25430;
+    }
+  }
+  &-track, &-track-1  {
+    background-color: #6C7DD9;
+    &:hover, &:focus {
+      box-shadow: none;
+      background-color: #6C7DD9;
+    }
+  }
+  &:hover {
+    &.ant-slider-track, .ant-slider-track-1  {
+      background-color: #89ABD9;
+    }
+    &.ant-slider:hover .ant-slider-handle:not(.ant-tooltip-open) {
+      border-color: #F25430;
+    }
+  }
+}
+
+.ant-slider-handle-dragging.ant-slider-handle-dragging.ant-slider-handle-dragging {
+  box-shadow: none;
+  border-color: #F25430;
+}
+
+.ant-switch-checked {
+  background-color: #6C7DD9;
+}

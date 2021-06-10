@@ -19,6 +19,10 @@ const PropertyCard = ({data}) => {
           </div>
         ))}      
       </Row>
+      {data.length === 0 && <div className="w-100">
+        <h4 className="text-center">Désolé, la recherche n'a rien donnée. Essayez autre chose.</h4>
+        </div>
+      }
     </div>
   );
 };

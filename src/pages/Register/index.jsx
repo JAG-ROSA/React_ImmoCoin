@@ -8,7 +8,7 @@ import { UiManager, UserManager } from "services";
 const Register = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
+  
   const registerFetch = (event) => {
     event.preventDefault();
 

@@ -1,12 +1,9 @@
 import React from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { useHistory, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { loginSuccess, loginFailed } from "store/user/userAction";
+import { useHistory } from "react-router-dom";
 import { UiManager, UserManager } from "services";
 
 const ForgotPassword = () => {
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const forgotPasswordFetch = (event) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { useHistory, Link, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess, loginFailed } from "store/user/userAction";
 import { UiManager, UserManager } from "services";
@@ -12,7 +12,6 @@ const ResetPassword = () => {
 
   const loginFetch = (event, newData) => {
     event.preventDefault();
-    console.log(newData.password)
     const data = {
       email: newData.email,
       password: event.target.formBasicPassword.value,
@@ -39,7 +38,6 @@ const ResetPassword = () => {
     if (event.target.formBasicPassword.value === event.target.formBasicPassword2.value) {
       UserManager.resetPassword(data)
         .then((data) => {
-          console.log(data)
           loginFetch(event, data);
           dispatch(loginSuccess(data.id));
           UiManager.openNotification("success", "Mot de passe modifié, welcome back !");

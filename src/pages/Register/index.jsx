@@ -51,18 +51,18 @@ const Register = () => {
               <Form.Control
                 size="sm"
                 type="email"
-                placeholder="name@example.com"
+                placeholder="nom@example.com"
               />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword" className="pb-3">
               <Form.Label>Mot de passe</Form.Label>
-              <Form.Control size="sm" type="password" placeholder="Password" />
+              <Form.Control size="sm" type="password" placeholder="Mot de passe" />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword2">
               <Form.Label>Confirmer le mot de passe</Form.Label>
-              <Form.Control size="sm" type="password" placeholder="Password" />
+              <Form.Control size="sm" type="password" placeholder="Confirmer le mot de passe" />
             </Form.Group>
             <Button
               variant="primary"

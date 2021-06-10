@@ -42,13 +42,13 @@ const Login = () => {
               <Form.Control
                 size="sm"
                 type="email"
-                placeholder="name@example.com"
+                placeholder="nom@example.com"
               />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Mot de passe</Form.Label>
-              <Form.Control size="sm" type="password" placeholder="Password" />
+              <Form.Control size="sm" type="password" placeholder="Mot de passe" />
             </Form.Group>
             <Button
               variant="primary"
@@ -58,7 +58,9 @@ const Login = () => {
               Se connecter
             </Button>
           </Form>
-
+          <Link to="/password/forgot" className="link-tertiary">
+            Mot de passe oublié ?
+          </Link><br/>
           <Link to="/register" className="link-tertiary">
             S'inscrire
           </Link>

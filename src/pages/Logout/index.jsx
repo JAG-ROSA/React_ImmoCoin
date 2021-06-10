@@ -22,7 +22,7 @@ const Logout = () => {
         console.log(error.message);
       });
   });
-
+  
   return (
     <Container>
       <p>Déconnexion en cours</p>

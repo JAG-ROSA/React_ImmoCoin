@@ -1,6 +1,5 @@
 import React from "react";
 import { Table } from "react-bootstrap";
-import { PropertiesManager, UiManager } from "services";
 import PropertyHeader from "./PropertyHeader";
 import PropertyItem from "./PropertyItem";
 

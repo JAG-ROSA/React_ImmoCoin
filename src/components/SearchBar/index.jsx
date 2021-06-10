@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { Slider, Switch, Row, Col } from 'antd';
+import { Slider, Switch, Row, Col, Button } from 'antd';
 import { Form } from "react-bootstrap";
 
 const SearchBar = ({data, filtered}) => {
@@ -32,6 +32,17 @@ const SearchBar = ({data, filtered}) => {
     setDisabled(disabled);
   };
 
+  const handleSearchReset = (e) => {
+    setSearchTerm("");
+    setSearchLocation("");
+    setSearchCategory("");
+    setInputValueMin(100000);
+    setInputValueMax(500000);
+    document.querySelector("#searchTerme").value = "";
+    document.querySelector("#searchLocation").value = "";
+    document.querySelector("#searchCategory").value = "Catégorie";
+  };
+
   const onChange = (value) => {
     setInputValueMin(value[0]);
     setInputValueMax(value[1]);
@@ -55,7 +66,7 @@ const SearchBar = ({data, filtered}) => {
       if (searchCategory === "catégorie") {
         filter(inputValueMin, inputValueMax, searchTerm, searchLocation, "");
       } else {
-        filter(inputValueMin, inputValueMax, searchTerm, searchLocation, searchCategory)
+        filter(inputValueMin, inputValueMax, searchTerm, searchLocation, searchCategory);
       }
     }
   }, [inputValueMin, inputValueMax, data, disabled, searchTerm, searchLocation, searchCategory]);
@@ -73,12 +84,12 @@ const SearchBar = ({data, filtered}) => {
       <Form>
         <div className="d-flex justify-content-center">
           <Form.Group controlId="searchTerme" className="col-md-3 mb-3">
-            <Form.Control type="text" placeholder="Je recherche..." className="text-center" onChange={(e) =>handleSearch(e)}/>
+            <Form.Control type="text" placeholder="Je recherche..." className="text-center" onChange={(e) => handleSearch(e)}/>
           </Form.Group>
-          <Form.Group controlId="searchTerme" className="col-md-3 mb-3">
-            <Form.Control type="text" placeholder="Où ?" className="text-center" onChange={(e) =>handleSearchLocation(e)}/>
+          <Form.Group controlId="searchLocation" className="col-md-3 mb-3">
+            <Form.Control type="text" placeholder="Où ?" className="text-center" onChange={(e) => handleSearchLocation(e)}/>
           </Form.Group>
-          <Form.Group controlId="searchCategory" onChange={(e) =>handleSearchCategory(e)}>
+          <Form.Group controlId="searchCategory" onChange={(e) => handleSearchCategory(e)}>
             <Form.Control defaultValue="Catégorie" as="select">
               <option>Catégorie</option>
               <option>Villa</option>
@@ -104,7 +115,15 @@ const SearchBar = ({data, filtered}) => {
         </Col>
         <p className="my-text-tertiary open-sans-semi-bold ps-3">{inputValueMax} €</p>
       </Row>
-      Désactiver la recherche par prix: <Switch size="small" checked={disabled} onChange={handleDisabledChange}/>
+      Désactiver la recherche par prix: <Switch size="small" checked={disabled} onChange={handleDisabledChange}/><br/>
+      <Button
+        variant="primary"
+        type="submit"
+        className="btn btn-secondary mt-2 mb-3"
+        onClick={handleSearchReset}
+      >
+        Remise à 0
+      </Button>
     </div>
   );
 };

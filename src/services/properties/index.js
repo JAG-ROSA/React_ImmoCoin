@@ -11,20 +11,24 @@ export default class PropertiesManager {
     return response.data;
   }
 
-  static async createProperties(title, description, price) {
+  static async createProperties(title, description, price, category, location) {
     const response = await API.post("/properties", {
       title,
       description,
       price,
+      category,
+      location,
     });
     return response.data;
   }
 
-  static async updateProperties(title, description, price, id) {
+  static async updateProperties(title, description, price, category, location, id) {
     const response = await API.put(`/properties/${id}`, {
       title,
       description,
       price,
+      category,
+      location,
     });
     return response.data;
   }

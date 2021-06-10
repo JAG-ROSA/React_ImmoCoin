@@ -16,18 +16,16 @@ const INITIAL_STATE = {
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
+  console.log(action);
   switch (action.type) {
-    case USER_REGISTRATION_FAILED || LOGIN_FAILED:
+    case USER_REGISTRATION_FAILED:
+    case LOGIN_FAILED:
       return {
         ...state,
         isLogged: false,
         error: action.error,
       };
-    case USER_REGISTRATION_SUCCESS || LOGIN_SUCCESS:
-      return {
-        ...state,
-        isLogged: true,
-      };
+    case USER_REGISTRATION_SUCCESS:
     case LOGIN_SUCCESS:
       return {
         ...state,

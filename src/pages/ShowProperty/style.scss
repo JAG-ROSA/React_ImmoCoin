@@ -1,0 +1,78 @@
+@import "style/_variables";
+
+.ShowProperty {
+  padding: 5%;
+  h1 {
+    color: $tertiary-color;
+    text-align: center;
+  }
+  .show-property-content {
+    display: flex;
+    flex-direction: column;
+    padding-right: 20%;
+    padding-left: 20%;
+    padding-bottom: 7%;
+    hr {
+      color: $primary-color;
+      height: 1.5px;
+      margin-top: 0;
+    }
+    .show-property-infos {
+      padding: 2%;
+      display: flex;
+      justify-content: space-between;
+      .my-medium {
+        font-size: large;
+      }
+      .show-property-email,
+      .show-property-price,
+      .show-property-location,
+      .show-property-category {
+        color: $tertiary-color;
+        align-items: center;
+        .my-mr {
+          margin-right: 5px;
+        }
+      }
+      .show-property-email {
+        a,
+        a:visited {
+          text-decoration: none;
+          position: relative;
+          color: $tertiary-color;
+          &:hover:after {
+            width: 100%;
+          }
+        }
+        color: $tertiary-color;
+        position: relative;
+        overflow: hidden;
+        .contact-label {
+          transform: translateX(0);
+          transition: transform 0.3s ease;
+        }
+        .contact-email {
+          text-align: center;
+          position: absolute;
+          width: 100%;
+          top: 0;
+          transform: translateX(100%);
+          transition: transform 0.3s ease;
+        }
+        &:hover {
+          .contact-email {
+            color: $primary-color;
+            transform: translateX(0);
+          }
+          .contact-label {
+            transform: translateX(-100%);
+          }
+        }
+      }
+    }
+    img {
+      width: 100%;
+      align-self: center;
+    }
+  }
+}

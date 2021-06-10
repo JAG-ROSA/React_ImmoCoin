@@ -1,10 +1,8 @@
 export {
-  login,
-  logout,
   registrationSuccess,
   registrationFailed,
   loginSuccess,
   loginFailed,
   logoutSuccess,
-  logoutfailed,
+  logoutFailed,
 } from "store/user/userAction";

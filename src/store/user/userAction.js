@@ -7,8 +7,9 @@ import {
   USER_REGISTRATION_SUCCESS,
 } from "./userType";
 
-export const registrationSuccess = () => ({
+export const registrationSuccess = (id) => ({
   type: USER_REGISTRATION_SUCCESS,
+  userId: id,
 });
 
 export const registrationFailed = (error) => ({

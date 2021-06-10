@@ -12,6 +12,8 @@ const PropertyCard = ({data}) => {
               <Card.Body>
                 <Card.Title>{property.title}</Card.Title>
                 <Card.Text>{`Descrition : ${property.description}`}</Card.Text>
+                <Card.Text>{`Lieux : ${property.location}`}</Card.Text>
+                <Card.Text>{`Catégorie : ${property.category}`}</Card.Text>
                 <Card.Text>{`Prix : ${property.price} €`}</Card.Text>
                 <Link to={{pathname: `/properties/${property.id}`}} className="btn btn-sm">Voir la propriété</Link>
               </Card.Body>

@@ -1,14 +1,14 @@
 import React from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 
-const UserProfile = ({user, onUpdate}) => (
+const UserProfile = ({userDetails, onUpdate}) => (
   <Form onSubmit={onUpdate}>
     <Form.Group as={Row} controlId="formPlaintextEmail">
       <Form.Label column sm="2">
         Email
       </Form.Label>
       <Col sm="10">
-        <Form.Control plaintext readOnly defaultValue={user.email}/>
+        <Form.Control plaintext readOnly defaultValue={userDetails.user.email}/>
       </Col>
     </Form.Group>
     <Form.Group as={Row} controlId="formPlaintextFirstName">
@@ -16,7 +16,7 @@ const UserProfile = ({user, onUpdate}) => (
         Prénom
       </Form.Label>
       <Col sm="10">
-        <Form.Control plaintext placeholder="Entrez votre prénom" defaultValue={user.first_name}/>
+        <Form.Control plaintext placeholder="Entrez votre prénom" defaultValue={userDetails.user.first_name}/>
       </Col>
     </Form.Group>
 
@@ -25,7 +25,7 @@ const UserProfile = ({user, onUpdate}) => (
         Nom
       </Form.Label>
       <Col sm="10">
-        <Form.Control plaintext placeholder="Entrez votre nom" defaultValue={user.last_name}/>
+        <Form.Control plaintext placeholder="Entrez votre nom" defaultValue={userDetails.user.last_name}/>
       </Col>
     </Form.Group>
 

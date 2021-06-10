@@ -6,6 +6,8 @@ export default class UserManager {
   static async registerUser(email, password) {
     const response = await API.post("/users", { user: { email, password } });
     Cookies.set(AUTH_TOKEN, response.headers.authorization, { expires: 7 });
+    Cookies.set(USER_ID, response.data.id, { expires: 7 });
+    return response.data;
   }
 
   static async loginUser(email, password) {

@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { UiManager, PropertiesManager } from "services";
 
 const CreatePost = () => {
- 
+  const [postInformation, setPostInformation] = useState([]);
+
+  const createPost = (event) => {
+    event.preventDefault();
+    const title = event.target.formTitle.value;
+    const description = event.target.formDescription.value;
+    const price = event.target.formPrice.value;
+    PropertiesManager.createProperties(title, description, price)
+      .then((response) => {
+        setPostInformation(response);
+        UiManager.openNotification("success", "Post créé !");
+    });
+  };
+  console.log(postInformation);
   return (
-    <Form>
+    <Form onSubmit={createPost}>
       <Form.Group controlId="formTitle">
         <Form.Label>Titre</Form.Label>
         <Form.Control type="text" placeholder="Donnez un titre à votre annonce" />

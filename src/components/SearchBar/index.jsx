@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { Slider, Switch, Row, Col } from 'antd';
 import { Form } from "react-bootstrap";
-import './style.scss';
 
 const SearchBar = ({data, filtered}) => {
   const [filteredData, setFilteredData] = useState([]);
@@ -49,13 +48,13 @@ const SearchBar = ({data, filtered}) => {
     <div>
       <Form>
         <div className="d-flex justify-content-center">
-          <Form.Group controlId="searchTerme" className="col-3 mb-3">
+          <Form.Group controlId="searchTerme" className="col-md-3 mb-3">
             <Form.Control type="text" placeholder="Je recherche..." className="text-center" onChange={(e) =>handleSearch(e)}/>
           </Form.Group>
         </div>
       </Form>
-      <Row className="d-flex justify-content-center">
-        <p className="my-text-tertiary fs-5 pe-3">{inputValueMin} €</p>
+      <Row className="d-flex justify-content-center ">
+        <p className="my-text-tertiary open-sans-semi-bold pe-3">{inputValueMin} €</p>
         <Col span={12}>
           <Slider 
             range
@@ -67,7 +66,7 @@ const SearchBar = ({data, filtered}) => {
             onChange={onChange}
           />
         </Col>
-        <p className="my-text-tertiary fs-5 ps-3">{inputValueMax} €</p>
+        <p className="my-text-tertiary open-sans-semi-bold ps-3">{inputValueMax} €</p>
       </Row>
       Désactiver la recherche par prix: <Switch size="small" checked={disabled} onChange={handleDisabledChange}/> 
        {/* <div className="d-flex justify-content-center align-items-center form-check form-switch">

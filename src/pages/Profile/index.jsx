@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-// import { Link } from "react-router-dom";
+import { UiManager, UserManager } from "services";
 import UserProfile from "components/UserProfile";
 import CreatePost from "components/CreatePost";
-import { UiManager, UserManager } from "services";
-// import "./style.scss";
 
 const Profile = () => {
   const [isUserProfile, setIsUserProfile] = useState(false);

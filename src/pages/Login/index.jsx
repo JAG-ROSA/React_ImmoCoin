@@ -32,8 +32,8 @@ const Login = () => {
 
   return (
     <Container>
-      <div className="d-flex justify-content-center align-items-center">
-        <div className="col-sm-5 col-lg-4 my-bg-light border-quaternary p-4 my-5">
+      <div className="d-flex justify-content-center">
+        <div className="col col-md-8 col-lg-5 my-bg-light border-quaternary p-4 my-5 mx-3">
           <h2 className=" my-text-tertiary">Se connecter</h2>
 
           <Form onSubmit={loginFetch}>

@@ -34,7 +34,11 @@ const ForgotPassword = () => {
           <Form onSubmit={forgotPasswordFetch}>
             <Form.Group controlId="formBasicEmail" className="pb-3">
               <Form.Label>Email</Form.Label>
-              <Form.Control size="sm" type="email" placeholder="nom@example.com" />
+              <Form.Control
+                size="sm"
+                type="email"
+                placeholder="nom@example.com"
+              />
             </Form.Group>
             <Button variant="primary" type="submit" className="btn btn-secondary mt-2 mb-3">Réinitialiser</Button>
           </Form>

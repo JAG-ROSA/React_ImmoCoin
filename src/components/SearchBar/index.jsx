@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { Slider, Switch, Row, Col } from 'antd';
+import { Slider, Switch, Row, Col, Button } from 'antd';
 import { Form } from "react-bootstrap";
-import './style.scss';
 
 const SearchBar = ({data, filtered}) => {
   const [filteredData, setFilteredData] = useState([]);
@@ -10,6 +9,8 @@ const SearchBar = ({data, filtered}) => {
   const [inputValueMin, setInputValueMin] = useState(100000);
   const [inputValueMax, setInputValueMax] = useState(500000);
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchLocation, setSearchLocation] = useState("");
+  const [searchCategory, setSearchCategory] = useState("");
 
   useEffect(() =>{
     setFilteredData(data);
@@ -19,8 +20,27 @@ const SearchBar = ({data, filtered}) => {
     setSearchTerm(e.target.value.toLowerCase());
   };
 
+  const handleSearchLocation = (e) => {
+    setSearchLocation(e.target.value.toLowerCase());
+  };
+
+  const handleSearchCategory = (e) => {
+    setSearchCategory(e.target.value.toLowerCase());
+  };
+
   const handleDisabledChange = (disabled) => {
     setDisabled(disabled);
+  };
+
+  const handleSearchReset = (e) => {
+    setSearchTerm("");
+    setSearchLocation("");
+    setSearchCategory("");
+    setInputValueMin(100000);
+    setInputValueMax(500000);
+    document.querySelector("#searchTerme").value = "";
+    document.querySelector("#searchLocation").value = "";
+    document.querySelector("#searchCategory").value = "Catégorie";
   };
 
   const onChange = (value) => {
@@ -28,34 +48,60 @@ const SearchBar = ({data, filtered}) => {
     setInputValueMax(value[1]);
   };
 
-  const searchData = (value) => {
-    filtered(value);
-  };
-
   useEffect(() => {
-    const filter = (min, max, value) => {
+    const filter = (min, max, valueTerm, valueLocation, valueCategory) => {
       let result = [];
       result = data.filter((data) => {
-      return (data.price >= min && data.price <= max && (data.title.toLowerCase().search(value) !== -1 || data.description.toLowerCase().search(value) !== -1));
+      return (data.price >= min && data.price <= max && (data.title.toLowerCase().search(valueTerm) !== -1 || data.description.toLowerCase().search(valueTerm) !== -1) && data.location.toLowerCase().search(valueLocation) !== -1 && data.category.toLowerCase().search(valueCategory) !== -1);
       });
       setFilteredData(result);
-      searchData(filteredData);
     }
-    disabled ? filter(0, 1000000, searchTerm) : filter(inputValueMin, inputValueMax, searchTerm);    
-  }, [inputValueMin, inputValueMax, data, disabled, searchTerm]);
+    if (disabled) {
+      if (searchCategory === "catégorie") {
+        filter(inputValueMin, inputValueMax, searchTerm, searchLocation, "");
+      } else {
+        filter(0, 1000000, searchTerm, searchLocation, searchCategory);
+      }
+    } else {
+      if (searchCategory === "catégorie") {
+        filter(inputValueMin, inputValueMax, searchTerm, searchLocation, "");
+      } else {
+        filter(inputValueMin, inputValueMax, searchTerm, searchLocation, searchCategory);
+      }
+    }
+  }, [inputValueMin, inputValueMax, data, disabled, searchTerm, searchLocation, searchCategory]);
 
-  
+  useEffect(() => {
+    const searchData = (value) => {
+      filtered(value);
+    };
+
+    searchData(filteredData);
+  }, [filteredData]);
+
   return (
     <div>
       <Form>
         <div className="d-flex justify-content-center">
-          <Form.Group controlId="searchTerme" className="col-3 mb-3">
-            <Form.Control type="text" placeholder="Je recherche..." className="text-center" onChange={(e) =>handleSearch(e)}/>
+          <Form.Group controlId="searchTerme" className="col-md-3 mb-3">
+            <Form.Control type="text" placeholder="Je recherche..." className="text-center" onChange={(e) => handleSearch(e)}/>
+          </Form.Group>
+          <Form.Group controlId="searchLocation" className="col-md-3 mb-3">
+            <Form.Control type="text" placeholder="Où ?" className="text-center" onChange={(e) => handleSearchLocation(e)}/>
+          </Form.Group>
+          <Form.Group controlId="searchCategory" onChange={(e) => handleSearchCategory(e)}>
+            <Form.Control defaultValue="Catégorie" as="select">
+              <option>Catégorie</option>
+              <option>Villa</option>
+              <option>Maison</option>
+              <option>Studio</option>
+              <option>Appartement</option>
+            </Form.Control>
           </Form.Group>
         </div>
       </Form>
-      <Row className="d-flex justify-content-center">
-        <p className="my-text-tertiary fs-5 pe-3">{inputValueMin} €</p>
+      <Row className="d-flex justify-content-center ">
+        <p className="my-text-tertiary open-sans-semi-bold pe-3">{inputValueMin} €</p>
         <Col span={12}>
           <Slider 
             range
@@ -67,13 +113,17 @@ const SearchBar = ({data, filtered}) => {
             onChange={onChange}
           />
         </Col>
-        <p className="my-text-tertiary fs-5 ps-3">{inputValueMax} €</p>
+        <p className="my-text-tertiary open-sans-semi-bold ps-3">{inputValueMax} €</p>
       </Row>
-      Désactiver la recherche par prix: <Switch size="small" checked={disabled} onChange={handleDisabledChange}/> 
-       {/* <div className="d-flex justify-content-center align-items-center form-check form-switch">
-        <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"  onChange={handleDisabledChange}></input>
-        <label className="form-check-label ps-2" for="flexSwitchCheckDefault">Désactiver la recherche par prix</label>
-      </div> */}
+      Désactiver la recherche par prix: <Switch size="small" checked={disabled} onChange={handleDisabledChange}/><br/>
+      <Button
+        variant="primary"
+        type="submit"
+        className="btn btn-secondary mt-2 mb-3"
+        onClick={handleSearchReset}
+      >
+        Remise à 0
+      </Button>
     </div>
   );
 };

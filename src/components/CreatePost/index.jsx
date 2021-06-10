@@ -1,30 +1,56 @@
 import React from "react";
-import { Button, Form } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 
-const CreatePost = () => {
- 
-  return (
-    <Form>
-      <Form.Group controlId="formTitle">
-        <Form.Label>Titre</Form.Label>
-        <Form.Control type="text" placeholder="Donnez un titre à votre annonce" />
-      </Form.Group>
+const CreatePost = ({onCreate}) => (
+  <Form onSubmit={onCreate}>
+    <Form.Group as={Row} controlId="formTitle">
+      <Form.Label column sm="2">Titre</Form.Label>
+      <Col sm="10" className="pt-2">
+        <Form.Control size="sm" type="text" placeholder="Entrez un titre à votre annonce" />
+      </Col>
+    </Form.Group>
 
-      <Form.Group controlId="formDescription">
-        <Form.Label>Description</Form.Label>
-        <Form.Control type="text" placeholder="Veuillez décrire votre bien" />
-      </Form.Group>
-      
-      <Form.Group controlId="formPrice">
-        <Form.Label>Prix</Form.Label>
-        <Form.Control type="" placeholder="Veuillez donner un prix à votre bien" />
-      </Form.Group>
+    <Form.Group as={Row} controlId="formDescription">
+      <Form.Label column sm="2">Description</Form.Label>
+      <Col sm="10" className="pt-2">
+        <Form.Control size="sm" type="text" placeholder="Entrez une description" />
+      </Col>
+    </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
-  );
-};
+    <Form.Group as={Row} controlId="formCategory">
+      <Form.Label column sm="2">Catégorie</Form.Label>
+      <Col sm="10" className="pt-2">
+        <Form.Control className="form-select form-select-sm" as="select">
+          <option>Appartement</option>
+          <option>Maison</option>
+          <option>Studio</option>
+          <option>Villa</option>
+        </Form.Control>
+      </Col>
+    </Form.Group>
+
+    <Form.Group as={Row} controlId="formLocation">
+      <Form.Label column sm="2">Lieu</Form.Label>
+      <Col sm="10" className="pt-2">
+        <Form.Control size="sm" type="text" placeholder="Entrez votre lieu"/>
+      </Col>
+    </Form.Group>
+    
+    <Form.Group as={Row} controlId="formPrice">
+      <Form.Label column sm="2">Prix</Form.Label>
+      <Col sm="10" className="pt-2">
+        <Form.Control size="sm" type="number" placeholder="Entrez un prix" />
+      </Col>
+    </Form.Group>
+
+    <Form.Group as={Row}>
+      <Form.Label column sm="2"></Form.Label>
+      <Col sm="10" className="pt-2">
+        <button className="btn-secondary btn-sm" type="submit">Créer</button>
+      </Col>
+    </Form.Group>
+  </Form>
+);
+
 
 export default CreatePost;

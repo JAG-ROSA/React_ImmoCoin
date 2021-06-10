@@ -11,6 +11,9 @@ import Profile from "pages/Profile";
 import Login from "pages/Login";
 import Logout from "pages/Logout";
 import ShowProperty from "pages/ShowProperty";
+import EditProperty from "pages/EditProperty";
+import ForgotPassword from 'pages/ForgotPassword'
+import ResetPassword from 'pages/ResetPassword'
 
 const App = () => (
   <Router>
@@ -34,6 +37,15 @@ const App = () => (
         </Route>
         <Route path="/properties/:propId">
           <ShowProperty />
+        </Route>
+        <Route path="/property/edit">
+          <EditProperty />
+        </Route>
+        <Route path="/password/forgot">
+          <ForgotPassword />
+        </Route>
+        <Route path="/password/reset/:token">
+          <ResetPassword />
         </Route>
       </Switch>
     </main>

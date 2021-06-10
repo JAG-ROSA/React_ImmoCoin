@@ -17,6 +17,7 @@ const Login = () => {
     };
     UserManager.loginUser(data.email, data.password)
       .then((data) => {
+        console.log(data)
         dispatch(loginSuccess(data.id));
         UiManager.openNotification("success", "Connexion réussie !");
         history.push("/");
@@ -40,18 +41,18 @@ const Login = () => {
           <Form onSubmit={loginFetch}>
             <Form.Group controlId="formBasicEmail" className="pb-3">
               <Form.Label>Email</Form.Label>
-              <Form.Control size="sm" type="email" placeholder="name@example.com" />
+              <Form.Control size="sm" type="email" placeholder="nom@example.com" />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Mot de passe</Form.Label>
-              <Form.Control size="sm" type="password" placeholder="Password" />
+              <Form.Control size="sm" type="password" placeholder="Mot de passe" />
             </Form.Group>
             <Button variant="primary" type="submit" className="btn btn-secondary mt-4 mb-3">Se connecter</Button>
           </Form>
 
+          <Link to="/password/forgot" className="link-tertiary">Mot de passe oublié ?</Link><br/>
           <Link to="/register" className="link-tertiary">S'inscrire</Link>
-          <Link to="/password/forgot" className="link-tertiary">Mot de passe oublié</Link>
         
         </div>
       </div>

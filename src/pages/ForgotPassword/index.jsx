@@ -15,11 +15,11 @@ const ForgotPassword = () => {
       email: event.target.formBasicEmail.value,
     };
     UserManager.forgotPassword(data)
-      .then((data) => {
-        UiManager.openNotification("success", "Connexion réussie !");
+      .then(() => {
+        UiManager.openNotification("success", "Email de récupération du mot de passe envoyé !");
         history.push("/");
       })
-      .catch((error) => {
+      .catch(() => {
         UiManager.openNotification(
           "error",
           "Hum... il y a une petite erreur..."
@@ -32,17 +32,15 @@ const ForgotPassword = () => {
       <div className="d-flex justify-content-center align-items-center">
         <div className="col-sm-5 col-lg-4 my-bg-light border-quaternary p-4 my-5">
           
-          <h2 className=" my-text-tertiary">Se connecter</h2>
+          <h2 className=" my-text-tertiary">Mot de passe oublié</h2>
           
           <Form onSubmit={forgotPasswordFetch}>
             <Form.Group controlId="formBasicEmail" className="pb-3">
               <Form.Label>Email</Form.Label>
-              <Form.Control size="sm" type="email" placeholder="name@example.com" />
+              <Form.Control size="sm" type="email" placeholder="nom@example.com" />
             </Form.Group>
-            <Button variant="primary" type="submit" className="btn btn-secondary mt-4 mb-3">Se connecter</Button>
+            <Button variant="primary" type="submit" className="btn btn-secondary mt-2 mb-3">Réinitialiser</Button>
           </Form>
-
-          <Link to="/register" className="link-tertiary">S'inscrire</Link>
         
         </div>
       </div>

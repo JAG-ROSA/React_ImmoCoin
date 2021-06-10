@@ -1,5 +1,5 @@
 import React from "react";
-import {  Container, Form, Row, Col } from "react-bootstrap";
+import {  Container, Form } from "react-bootstrap";
 import { useLocation } from "react-router";
 import { PropertiesManager, UiManager } from "services";
 

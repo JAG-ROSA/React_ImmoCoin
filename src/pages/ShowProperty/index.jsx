@@ -7,12 +7,13 @@ import { PropertiesManager } from "services";
 import House from "assets/images/02_house.jpg";
 import "./style.scss";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const ShowProperty = () => {
   const { propId } = useParams();
   const [currentProperty, setCurrentProperty] = useState(undefined);
   const auth = useSelector((store) => store.isLogged);
+  const location = useLocation();
 
   useEffect(() => {
     PropertiesManager.showProperties(propId)
@@ -28,7 +29,7 @@ const ShowProperty = () => {
         <div className="ShowProperty">
           <h1>{currentProperty.property.title}</h1>
           <div className="show-property-content">
-            <img src={House} alt={currentProperty.property.title}/>
+            <img src={House} alt={currentProperty.property.title} />
             <div className="show-property-infos">
               <p className="show-property-price">
                 <RiMoneyEuroCircleLine className="my-mr my-medium" />
@@ -44,12 +45,21 @@ const ShowProperty = () => {
                     {currentProperty.user.email}
                   </a>
                 ) : (
-                  <Link to="/login" className="contact-email">
-                    <CgLogIn className="my-medium"/> Connexion
-                  </Link>
+                  <div className="show-property-log">
+                    <Link
+                      to={{
+                        pathname: "/login",
+                        state: { redirectUrl: location.pathname },
+                      }}
+                      className="contact-email"
+                    >
+                      <CgLogIn className="my-medium" /> Se connecter
+                    </Link>
+                  </div>
                 )}
                 <p className="contact-label">
-                  <BsFillEnvelopeFill className="my-mr my-medium" /> Contacter le vendeur
+                  <BsFillEnvelopeFill className="my-mr my-medium" /> Contacter
+                  le vendeur
                 </p>
               </p>
             </div>

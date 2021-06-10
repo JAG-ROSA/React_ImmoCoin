@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess, loginFailed } from "store/user/userAction";
 import { UiManager, UserManager } from "services";
@@ -8,6 +8,7 @@ import { UiManager, UserManager } from "services";
 const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
 
   const loginFetch = (event) => {
     event.preventDefault();
@@ -19,7 +20,8 @@ const Login = () => {
       .then((response) => {
         dispatch(loginSuccess(response.id));
         UiManager.openNotification("success", "Connexion réussie !");
-        history.push("/");
+        const redirect = location.state?.redirectUrl ?? "/";
+        history.push(redirect);
       })
       .catch((error) => {
         dispatch(loginFailed(error.message));
@@ -48,7 +50,11 @@ const Login = () => {
 
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Mot de passe</Form.Label>
-              <Form.Control size="sm" type="password" placeholder="Mot de passe" />
+              <Form.Control
+                size="sm"
+                type="password"
+                placeholder="Mot de passe"
+              />
             </Form.Group>
             <Button
               variant="primary"
@@ -60,7 +66,8 @@ const Login = () => {
           </Form>
           <Link to="/password/forgot" className="link-tertiary">
             Mot de passe oublié ?
-          </Link><br/>
+          </Link>
+          <br />
           <Link to="/register" className="link-tertiary">
             S'inscrire
           </Link>

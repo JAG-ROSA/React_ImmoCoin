@@ -11,6 +11,7 @@ import Profile from "pages/Profile";
 import Login from "pages/Login";
 import Logout from "pages/Logout";
 import ShowProperty from "pages/ShowProperty";
+import EditProperty from "pages/EditProperty";
 
 const App = () => (
   <Router>
@@ -34,6 +35,9 @@ const App = () => (
         </Route>
         <Route path="/properties/:propId">
           <ShowProperty />
+        </Route>
+        <Route path="/property/edit">
+          <EditProperty />
         </Route>
       </Switch>
     </main>

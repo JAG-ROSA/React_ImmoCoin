@@ -4,11 +4,11 @@ import { Row, Card } from "react-bootstrap";
 
 const PropertyCard = ({data}) => {
   return (
-    <div className="d-flex flex-wrap">
+    <div className="d-flex">
       <Row>
         {data.map((property) => (
-          <div key={property.id} className="col-md-6 col-lg-4 py-2">
-            <Card>
+          <div className="col-4 py-2">
+            <Card key={property.id}>
               <Card.Body>
                 <Card.Title>{property.title}</Card.Title>
                 <Card.Text>{`Descrition : ${property.description}`}</Card.Text>

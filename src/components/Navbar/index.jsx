@@ -1,4 +1,5 @@
 import React from "react";
+import { Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -8,25 +9,29 @@ const Navbar = () => {
   return (
     <header>
       <nav>
-        <div className="container">
-          <div className="d-flex justify-content-between align-items-baseline">
-            <h1 className="navbar-brand">
-              <Link to="/">ImmoCoin</Link>
-            </h1>
-            <ul className="d-flex">
+        <Container>
+          <div className="d-flex justify-content-between align-items-baseline nav">
+
+            <Form.Control type="checkbox" id="nav-check" />
+            <h1 className="navbar-brand"><Link to="/">ImmoCoin</Link></h1>
+
+            <div className="nav-btn pt-2 pe-3">
+              <label htmlFor="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+              </label>
+            </div>
+
+            <ul className="d-flex nav-links">
               {!auth ? (
-                <>
-                  <li className="pe-3">
-                    <Link to="/register">S'inscrire</Link>
-                  </li>
-                  <li className="pe-3">
-                    <Link to="/login">Se connecter</Link>
-                  </li>
-                </>
+                <li className="pe-3">
+                  <Link to="/login" className="pe-3">Se connecter</Link>
+                </li>
               ) : (
                 <>
                   <li className="pe-3">
-                    <Link to="/user/me">Profil</Link>
+                    <Link to="/user/me">Mon dashboard</Link>
                   </li>
                   <li className="pe-3">
                     <Link to="/logout">Se déconnecter</Link>
@@ -35,7 +40,7 @@ const Navbar = () => {
               )}
             </ul>
           </div>
-        </div>
+        </Container>
       </nav>
     </header>
   );

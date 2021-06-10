@@ -1,7 +1,11 @@
 @import 'variables', 'typographies', 'colors', 'buttons', 'forms';
 
+* {
+  box-sizing: border-box;
+}
+
 #root {
-  position : relative;
+  position: relative;
   min-height: 100%;
 }
 
@@ -10,7 +14,7 @@ html {
 }
 
 body { 
-  margin : auto;
+  margin: auto;
   font-family: 'Open_Sans-Regular';
   color: $black-color;
   scroll-behavior: smooth;
@@ -72,6 +76,79 @@ header {
   z-index:1000 !important;
 }
 
+.nav {
+  & .nav-btn {
+    display: none;
+  }
+  & .nav-links {
+    display: inline;
+    float: right;
+    font-size: 18px;
+  }
+  & #nav-check {
+    display: none;
+  }
+}
+
+@media (max-width:600px) {
+  .nav {
+    & .nav-btn {
+      display: inline-block;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+
+      & label {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        padding: 10px;
+        &:hover > span {
+          border-color: $quaternary-color;
+        }
+        & span {
+        display: block;
+        width: 25px;
+        height: 10px;
+        border-top: 3px solid $primary-color;
+        }
+      }
+    }
+
+    & ul {
+      top: 70px;
+      right: 25px;
+      width: 13em;
+      display: block;
+      position: absolute;
+      flex-direction: column;
+      text-align: center;
+      background-color: $primary-color;
+      transition: all 0.3s ease-in;
+      overflow-y: hidden;
+      & a {
+        display: block;
+        align-items: center;
+        width: 100%;
+        color: white;
+        padding-top: 15px;
+        &:hover {
+          color: $quaternary-color;
+        }
+      }
+    }
+
+    & #nav-check:not(:checked) ~ ul {
+      height: 0px;
+    }
+
+    & #nav-check:checked ~ ul {
+      height: 7em;
+      overflow-y: auto;
+    }
+  }
+}
+
 
 
 // FOOTER //
@@ -85,10 +162,11 @@ footer {
   left: 0;
   width: 100%;
   & a.title-footer {
-    font-family: 'Rajdhani-SemiBold';
+    font-family: 'Rajdhani-Bold';
     color: $quaternary-color;
     text-decoration: none;
-    font-size: 2em;
+    letter-spacing: 1.8px;
+    font-size: 1.9em;
   }
 }
 
@@ -107,6 +185,7 @@ footer {
 }
 
 .card {
+  min-width: 300px;
   border-radius: 0.2em;
   border: 1px solid $quaternary-color;
 }

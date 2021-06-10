@@ -10,7 +10,7 @@ const SearchBar = ({data, filtered}) => {
   const [inputValueMax, setInputValueMax] = useState(500000);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
-
+  const [searchCategory, setSearchCategory] = useState("");
 
   useEffect(() =>{
     setFilteredData(data);
@@ -19,8 +19,13 @@ const SearchBar = ({data, filtered}) => {
   const handleSearch = (e) => {
     setSearchTerm(e.target.value.toLowerCase());
   };
+
   const handleSearchLocation = (e) => {
     setSearchLocation(e.target.value.toLowerCase());
+  };
+
+  const handleSearchCategory = (e) => {
+    setSearchCategory(e.target.value.toLowerCase());
   };
 
   const handleDisabledChange = (disabled) => {
@@ -33,15 +38,27 @@ const SearchBar = ({data, filtered}) => {
   };
 
   useEffect(() => {
-    const filter = (min, max, value, location) => {
+    const filter = (min, max, valueTerm, valueLocation, valueCategory) => {
       let result = [];
       result = data.filter((data) => {
-      return (data.price >= min && data.price <= max && (data.title.toLowerCase().search(value) !== -1 || data.description.toLowerCase().search(value) !== -1) && data.location.toLowerCase().search(location) !== -1);
+      return (data.price >= min && data.price <= max && (data.title.toLowerCase().search(valueTerm) !== -1 || data.description.toLowerCase().search(valueTerm) !== -1) && data.location.toLowerCase().search(valueLocation) !== -1 && data.category.toLowerCase().search(valueCategory) !== -1);
       });
       setFilteredData(result);
     }
-    disabled ? filter(0, 1000000, searchTerm, searchLocation) : filter(inputValueMin, inputValueMax, searchTerm, searchLocation);    
-  }, [inputValueMin, inputValueMax, data, disabled, searchTerm, searchLocation]);
+    if (disabled) {
+      if (searchCategory === "catégorie") {
+        filter(inputValueMin, inputValueMax, searchTerm, searchLocation, "");
+      } else {
+        filter(0, 1000000, searchTerm, searchLocation, searchCategory);
+      }
+    } else {
+      if (searchCategory === "catégorie") {
+        filter(inputValueMin, inputValueMax, searchTerm, searchLocation, "");
+      } else {
+        filter(inputValueMin, inputValueMax, searchTerm, searchLocation, searchCategory)
+      }
+    }
+  }, [inputValueMin, inputValueMax, data, disabled, searchTerm, searchLocation, searchCategory]);
 
   useEffect(() => {
     const searchData = (value) => {
@@ -60,6 +77,15 @@ const SearchBar = ({data, filtered}) => {
           </Form.Group>
           <Form.Group controlId="searchTerme" className="col-md-3 mb-3">
             <Form.Control type="text" placeholder="Où ?" className="text-center" onChange={(e) =>handleSearchLocation(e)}/>
+          </Form.Group>
+          <Form.Group controlId="searchCategory" onChange={(e) =>handleSearchCategory(e)}>
+            <Form.Control defaultValue="Catégorie" as="select">
+              <option>Catégorie</option>
+              <option>Villa</option>
+              <option>Maison</option>
+              <option>Studio</option>
+              <option>Appartement</option>
+            </Form.Control>
           </Form.Group>
         </div>
       </Form>

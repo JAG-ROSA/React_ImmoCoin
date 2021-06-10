@@ -29,6 +29,11 @@
 	text-decoration: none;
 	position: relative;
 	color: $quaternary-color;
+  font-family: 'Open_Sans-SemiBold';
+  &:hover {
+    color: $quaternary-color;
+  }
+
 	
 	&:after {
 		content: '';
@@ -44,5 +49,34 @@
 	&:hover:after {
 		width: 100%;
 	}
+}
+
+.link-tertiary, .link-tertiary:visited {
+	text-decoration: none;
+	position: relative;
+	color: $tertiary-color;
+  font-family: 'Open_Sans-SemiBold';
+  &:hover  {
+    color: $tertiary-color;
+  }
 	
+	&:after {
+		content: '';
+		height: 2.3px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		background: $tertiary-color;
+		transition: 0.2s;
+	}
+
+	&:hover:after {
+		width: 100%;
+	}
+	
+}
+
+.border-quaternary {
+  border: 1px solid $tertiary-color;
 }

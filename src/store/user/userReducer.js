@@ -1,26 +1,48 @@
-import { AUTH_TOKEN } from "config";
+import { AUTH_TOKEN, USER_ID } from "config";
 import Cookies from "js-cookie";
-import { LOGIN, LOGOUT } from "./userType";
+import {
+  USER_REGISTRATION_FAILED,
+  USER_REGISTRATION_SUCCESS,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILED,
+} from "./userType";
 
 const INITIAL_STATE = {
-  id: Cookies.get(AUTH_TOKEN) || null,
-  mail: null,
+  isLogged: !!Cookies.get(AUTH_TOKEN),
+  userId: Cookies.get(USER_ID),
+  error: "",
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
-
   switch (action.type) {
-    case LOGIN:
+    case USER_REGISTRATION_FAILED || LOGIN_FAILED:
       return {
-        id: action.id,
-        mail: action.email,
+        ...state,
+        isLogged: false,
+        error: action.error,
       };
-    case LOGOUT:
-      Cookies.remove(AUTH_TOKEN);
-      return{
-        id: null,
-        mail: null,
-      }
+    case USER_REGISTRATION_SUCCESS || LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLogged: true,
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLogged: true,
+        userId: action.userId,
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        isLogged: false,
+        userId: "",
+      };
+    case LOGOUT_FAILED:
+      return {
+        error: action.error,
+      };
     default:
       return state;
   }

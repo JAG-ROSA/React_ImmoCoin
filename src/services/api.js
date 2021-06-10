@@ -9,7 +9,7 @@ API.interceptors.request.use(({ headers, ...config }) => ({
   headers: {
     ...headers,
     "Content-Type": "application/json",
-    Authorization: `${headers.Authorization || Cookies.get(AUTH_TOKEN)}`, /* prendre en compte aussi le store */
+    Authorization: `${headers.Authorization || Cookies.get(AUTH_TOKEN)}`,
   },
 }));
 

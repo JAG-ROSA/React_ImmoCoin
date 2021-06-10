@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "antd/dist/antd.css";
 import "style/style.scss";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
@@ -9,6 +10,7 @@ import Register from "pages/Register";
 import Profile from "pages/Profile";
 import Login from "pages/Login";
 import Logout from "pages/Logout";
+import ShowProperty from "pages/ShowProperty";
 
 const App = () => (
   <Router>
@@ -21,7 +23,7 @@ const App = () => (
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/user" exact>
+        <Route path="/user/me">
           <Profile />
         </Route>
         <Route path="/login">
@@ -29,6 +31,9 @@ const App = () => (
         </Route>
         <Route path="/logout">
           <Logout />
+        </Route>
+        <Route path="/properties/:propId">
+          <ShowProperty />
         </Route>
       </Switch>
     </main>

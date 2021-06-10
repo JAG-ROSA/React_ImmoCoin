@@ -1,13 +1,15 @@
-@import 'variables', 'typographies', 'colors', 'buttons';
+@import 'variables', 'typographies', 'colors', 'buttons', 'forms';
 
+#root {
+  position : relative;
+  min-height: 100%;
+}
 
 html {
   height: 100%;
 }
 
-body {
-  position : relative;
-  min-height: 100%;
+body { 
   margin : auto;
   font-family: 'Open_Sans-Regular';
   color: $black-color;
@@ -15,8 +17,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Rajdhani-SemiBold';
-  letter-spacing: 1.8px;
+  font-family: 'Rajdhani-Bold';
+  letter-spacing: 1.6px;
 }
 
 
@@ -94,4 +96,17 @@ footer {
 
 .pt-70 {
   padding-top: 70px;
+}
+
+.jumbotron {
+  background-image: url("../assets/images/01_happy_woman.jpg");
+  height: 80vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center top;
+}
+
+.card {
+  border-radius: 0.2em;
+  border: 1px solid $quaternary-color;
 }

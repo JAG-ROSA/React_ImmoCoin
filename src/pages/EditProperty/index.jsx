@@ -1,14 +1,11 @@
 import React from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useHistory, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import { PropertiesManager, UiManager } from "services";
 
 const EditProperty = () => {
-  const history = useHistory();
-
   const location = useLocation();
   const data = location.params;
-  console.log(data.data)
 
   const editProperty = (event) => {
     event.preventDefault();
@@ -17,7 +14,6 @@ const EditProperty = () => {
     const price = event.target.formPriceEdit.value;
     PropertiesManager.updateProperties(title, description, price, data.data);
     UiManager.openNotification("success", " Annonce mise à jour !");
-    history.push("/user/me");
   };
 
   return (
@@ -43,7 +39,6 @@ const EditProperty = () => {
       </Button>
     </Form>
     </Container>
-    
   );
 };
 

@@ -6,7 +6,7 @@ import PropertyItem from "./PropertyItem";
 const PropertiesList = ({userDetails, onDelete}) => {
   
   return (
-    <Table responsive>
+    <Table responsive className="table-hover">
       <PropertyHeader />
       <PropertyItem tableContents={userDetails} onDelete={onDelete}/>
     </Table>

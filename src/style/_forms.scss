@@ -15,7 +15,8 @@ input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
-.uneditable-input:focus {   
+.uneditable-input:focus,
+.form-select:focus {   
   border-color: $tertiary-color;
   box-shadow: none;
   outline: 0 none;

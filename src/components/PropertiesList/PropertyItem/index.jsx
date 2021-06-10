@@ -18,13 +18,14 @@ const PropertiesItem = ({tableContents, onDelete}) => {
     <tbody>
         {tableContents.property.map((tableContent) => (
           <tr key={tableContent.id}>
-            <td> {tableContent.id}</td>
-            <td> {tableContent.title}</td>
-            <td> {tableContent.description}</td>
-            <td> {tableContent.price}</td>
-            <td>
-              {<Link to={{pathname: "/property/edit", params:{ data: tableContent.id}}} className="btn-secondary btn-lg">Modifier</Link>}
-              {<Button onClick={(id) => onDelete(tableContent.id)} className="btn-secondary btn-lg">Effacer</Button>}
+            <td className="col-3">{tableContent.title}</td>
+            <td className="col-4">{tableContent.description}</td>
+            <td className="col-2">{tableContent.category}</td>
+            <td className="col-2">{tableContent.location}</td>
+            <td className="col-2">{tableContent.price} €</td>
+            <td className="d-flex justify-content-end flex-column">
+              <Link to={{pathname: "/property/edit", params:{ data: tableContent}}} className="btn btn-sm">Modifier</Link>
+              <Button onClick={(id) => onDelete(tableContent.id)} className="btn-secondary btn-sm mt-2">Effacer</Button>
             </td>
           </tr>
         ))}

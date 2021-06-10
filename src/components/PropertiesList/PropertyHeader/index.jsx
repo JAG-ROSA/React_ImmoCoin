@@ -1,7 +1,7 @@
 import React from "react";
 
 const PropertyHeader = () => {
-  const headTableName = ["#", "Title", "Description", "Prix (€)", "Action"];
+  const headTableName = ["Title", "Description", "Catégorie", "Lieu", "Prix", ""];
   return (
     <thead>
       <tr>

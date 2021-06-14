@@ -1,6 +1,8 @@
 import API from "../api";
 import Cookies from "js-cookie";
 import { AUTH_TOKEN, USER_ID } from "config";
+import store from "store/store";
+import { loginFailed, loginSuccess } from "store";
 
 export default class UserManager {
   static async registerUser(email, password) {
@@ -11,12 +13,17 @@ export default class UserManager {
   }
 
   static async loginUser(email, password) {
-    const response = await API.post("/users/sign_in", {
-      user: { email, password },
-    });
-    Cookies.set(AUTH_TOKEN, response.headers.authorization, { expires: 7 });
-    Cookies.set(USER_ID, response.data.id, { expires: 7 });
-    return response.data;
+    try {
+      const response = await API.post("/users/sign_in", {
+        user: { email, password },
+      });
+      store.dispatch(loginSuccess(response.data.id));
+      Cookies.set(AUTH_TOKEN, response.headers.authorization, { expires: 7 });
+      Cookies.set(USER_ID, response.data.id, { expires: 7 });
+      /* return response.data; */
+    } catch (error) {
+      store.dispatch(loginFailed(error.message));
+    }
   }
 
   static async logoutUser() {

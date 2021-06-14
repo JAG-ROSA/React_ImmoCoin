@@ -17,7 +17,7 @@ const ShowProperty = () => {
   const location = useLocation();
 
   useEffect(() => {
-    PropertiesManager.showProperties(propId)
+    PropertiesManager.getProperty(propId)
       .then((data) => {
         setCurrentProperty(data);
       })

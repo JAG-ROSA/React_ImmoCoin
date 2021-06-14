@@ -38,7 +38,7 @@ const Profile = () => {
   };
 
   const deleteProperty = (id) => {
-    PropertiesManager.deleteProperties(id).then((response)=> getUserProfile());
+    PropertiesManager.deleteProperty(id).then((response)=> getUserProfile());
     UiManager.openNotification("success", " Annonce bien effacée !");
   };
 
@@ -50,7 +50,7 @@ const Profile = () => {
     const category = event.target.formCategory.value;
     const location = event.target.formLocation.value;
     PropertiesManager
-      .createProperties(title, description, price, category, location)
+      .createProperty(title, description, price, category, location)
       .then(() => {
         getUserProfile();
         UiManager.openNotification("success", "Annonce créée !")

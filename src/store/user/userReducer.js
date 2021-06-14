@@ -31,11 +31,13 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isLogged: true,
         userId: action.userId,
+        error: "",
       };
     case LOGOUT_SUCCESS:
       return {
         isLogged: false,
         userId: "",
+        error: "",
       };
     case LOGOUT_FAILED:
       return {

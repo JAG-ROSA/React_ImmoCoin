@@ -6,12 +6,17 @@ export default class PropertiesManager {
     return response.data;
   }
 
-  static async showProperties(id) {
+  /**
+   * Get property data from API
+   * @param {number} id the ID of the desired property
+   * @returns the property corresponding to the ID
+   */
+  static async getProperty(id) {
     const response = await API.get(`/properties/${id}`);
     return response.data;
   }
 
-  static async createProperties(title, description, price, category, location) {
+  static async createProperty(title, description, price, category, location) {
     const response = await API.post("/properties", {
       title,
       description,
@@ -22,7 +27,14 @@ export default class PropertiesManager {
     return response.data;
   }
 
-  static async updateProperties(title, description, price, category, location, id) {
+  static async updateProperty(
+    title,
+    description,
+    price,
+    category,
+    location,
+    id
+  ) {
     const response = await API.put(`/properties/${id}`, {
       title,
       description,
@@ -33,7 +45,7 @@ export default class PropertiesManager {
     return response.data;
   }
 
-  static async deleteProperties(id) {
+  static async deleteProperty(id) {
     await API.delete(`/properties/${id}`);
   }
 }

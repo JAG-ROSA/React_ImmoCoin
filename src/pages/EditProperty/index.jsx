@@ -14,7 +14,7 @@ const EditProperty = () => {
     const price = event.target.formPriceEdit.value;
     const category = event.target.formCategory.value;
     const location = event.target.formLocation.value;
-    PropertiesManager.updateProperties(title, description, price, category, location, data.data.id)
+    PropertiesManager.updateProperty(title, description, price, category, location, data.data.id)
     .then(() => {
       UiManager.openNotification("success", " Annonce mise à jour !");
     })

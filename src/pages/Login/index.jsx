@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { useHistory, Link, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { loginSuccess, loginFailed } from "store/user/userAction";
+/* import { useDispatch } from "react-redux"; */
+/* import { loginSuccess, loginFailed } from "store/user/userAction"; */
 import { UiManager, UserManager } from "services";
+import { useSelector } from "react-redux";
 
 const Login = () => {
-  const dispatch = useDispatch();
+  /* const dispatch = useDispatch(); */
   const history = useHistory();
   const location = useLocation();
+  const isLoggedSuccess = useSelector((store) => store.isLogged);
+  const isLoggedFailed = useSelector((store) => !!store.error);
+
+  useEffect(() => {
+    if (isLoggedSuccess) {
+      UiManager.openNotification("success", "Connexion réussie !");
+      const redirect = location.state?.redirectUrl ?? "/";
+      history.push(redirect);
+    } else if (isLoggedFailed) {
+      UiManager.openNotification(
+        "error",
+        "Hum... il y a une petite erreur! 🤔"
+      );
+    }
+  }, [isLoggedSuccess, isLoggedFailed]);
 
   const loginFetch = (event) => {
     event.preventDefault();
@@ -16,8 +32,8 @@ const Login = () => {
       email: event.target.formBasicEmail.value,
       password: event.target.formBasicPassword.value,
     };
-    UserManager.loginUser(data.email, data.password)
-      .then((response) => {
+    UserManager.loginUser(data.email, data.password);
+    /*       .then((response) => {
         dispatch(loginSuccess(response.id));
         UiManager.openNotification("success", "Connexion réussie !");
         const redirect = location.state?.redirectUrl ?? "/";
@@ -25,11 +41,11 @@ const Login = () => {
       })
       .catch((error) => {
         dispatch(loginFailed(error.message));
-        UiManager.openNotification(
+         UiManager.openNotification(
           "error",
           "Hum... il y a une petite erreur! 🤔"
         );
-      });
+      }); */
   };
 
   return (
